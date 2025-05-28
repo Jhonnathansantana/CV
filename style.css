@@ -1,0 +1,480 @@
+/* Variables de Color */
+        :root {
+            --color-darkgrey: #36454F; /* Texto oscuro principal, fondo de secciones oscuras */
+            --color-white: #FFFFFF; /* Texto en fondos oscuros, fondo de tarjetas, texto en fondos claros */
+            --color-pantone-blue: #0846cc; /* Fondo de elementos principales (header, hero, fixed menu, footer), acentos, botones */
+            --color-light-gray-bg: #f8fafc; /* Fondo general de secciones claras (aunque se usa blanco puro) */
+            --color-text-dark: var(--color-darkgrey); /* Texto oscuro en fondos claros */
+            --color-text-light: #6c757d; /* Texto secundario/fechas en fondos claros */
+        }
+
+        /* Estilos Generales del Cuerpo */
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: var(--color-darkgrey); /* Fondo principal Darkgrey */
+            color: var(--color-white); /* Texto principal blanco */
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Previene scroll horizontal */
+        }
+
+        /* Layout Principal con Menú Fijo a la Derecha */
+        .main-layout-wrapper {
+            display: flex;
+            flex-direction: column; /* Por defecto en móvil */
+            min-height: 100vh;
+        }
+
+        @media (min-width: 1024px) { /* En pantallas grandes (lg) */
+            .main-layout-wrapper {
+                flex-direction: row; /* Columnas en desktop */
+            }
+            .content-area {
+                flex-grow: 1; /* El contenido principal ocupa el espacio restante */
+                overflow-y: auto; /* Permite scroll solo en el contenido */
+                height: 100vh; /* Ocupa toda la altura de la ventana */
+                padding-right: 280px; /* Espacio para la barra lateral fija */
+            }
+            .fixed-right-menu {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 280px; /* Ancho fijo del menú */
+                height: 100vh;
+                background-color: var(--color-pantone-blue); /* Fondo azul Pantone */
+                color: var(--color-white);
+                padding: 2rem 1.5rem;
+                box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                overflow-y: auto; /* Scroll si el menú es muy largo */
+                z-index: 50; /* Asegura que esté por encima del contenido */
+            }
+        }
+
+        /* Clases de Fondo para Secciones */
+        .header-bg {
+            background-color: var(--color-pantone-blue); /* Fondo azul Pantone */
+            color: var(--color-white);
+        }
+        .section-dark-grey-bg { /* Nueva clase para secciones con fondo Darkgrey */
+            background-color: var(--color-darkgrey);
+            color: var(--color-white);
+        }
+        .section-light-bg {
+            background-color: var(--color-white); /* Fondo blanco */
+            color: var(--color-text-dark); /* Texto Darkgrey */
+        }
+
+        /* Estilos de Texto y Títulos */
+        .text-pantone-blue {
+            color: var(--color-pantone-blue);
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            letter-spacing: -0.025em;
+        }
+        .section-light-bg .section-title {
+            color: var(--color-text-dark); /* Títulos en secciones claras en Darkgrey */
+        }
+        .section-dark-grey-bg .section-title,
+        .section-pantone-blue-bg .section-title { /* Para secciones con fondo Darkgrey o Pantone Blue */
+            color: var(--color-white); /* Títulos en blanco */
+        }
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 3.5rem;
+            }
+        }
+        .sub-section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .section-light-bg .sub-section-title {
+            color: var(--color-text-dark); /* Subtítulos en secciones claras en Darkgrey */
+        }
+        .section-dark-grey-bg .sub-section-title,
+        .section-pantone-blue-bg .sub-section-title { /* Para secciones con fondo Darkgrey o Pantone Blue */
+            color: var(--color-white); /* Subtítulos en blanco */
+        }
+
+
+        /* Sección Hero (Inicio) */
+        .hero-section {
+            padding-top: 8rem;
+            padding-bottom: 8rem;
+            text-align: center;
+            background-color: var(--color-pantone-blue); /* Fondo azul Pantone */
+            color: var(--color-white);
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.03em;
+        }
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 5rem;
+            }
+        }
+        .hero-subtitle {
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+        }
+        .hero-text {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            max-width: 48rem;
+            margin-left: auto;
+            margin-right: auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .profile-image {
+            border: 4px solid var(--color-white);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Navegación */
+        .nav-link {
+            color: var(--color-white);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex; /* Para alinear icono y texto */
+            align-items: center; /* Centrar verticalmente */
+        }
+        .nav-link span.material-symbols-outlined {
+            margin-right: 0.75rem; /* Espacio entre icono y texto */
+        }
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--color-white);
+            font-weight: 700;
+        }
+        /* Estilos específicos para el menú fijo derecho */
+        .fixed-right-menu .nav-link {
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .fixed-right-menu .nav-link.active {
+            background-color: var(--color-white);
+            color: var(--color-pantone-blue);
+        }
+        .fixed-right-menu .nav-link.active:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Menú móvil (oculto en desktop) */
+        #mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 900;
+            display: none; /* Oculto por defecto, controlado por JS */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #mobile-menu-overlay.open {
+            opacity: 1;
+        }
+        #mobile-menu-content {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100%;
+            background-color: var(--color-pantone-blue);
+            padding: 2rem 1.5rem;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 950;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            display: none; /* Oculto por defecto, controlado por JS */
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        #mobile-menu-content.open {
+            transform: translateX(0);
+            display: flex;
+        }
+        #mobile-menu-content .nav-link {
+            width: 100%;
+            text-align: left;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+        }
+        #mobile-menu-content .close-btn {
+            align-self: flex-end;
+            margin-bottom: 1rem;
+            color: var(--color-white);
+            font-size: 2rem;
+        }
+
+
+        /* Tarjetas de Portafolio (Experiencia, Educación, Certificaciones) */
+        .card-portfolio {
+            background-color: var(--color-white); /* Fondo blanco por defecto */
+            color: var(--color-text-dark); /* Texto Darkgrey por defecto */
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+        }
+        .section-dark-grey-bg .card-portfolio { /* Estilo de tarjeta en sección Darkgrey */
+            background-color: rgba(255, 255, 255, 0.08); /* Blanco transparente */
+            color: var(--color-white); /* Texto blanco */
+        }
+        .card-portfolio:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-pantone-blue);
+        }
+        .section-dark-grey-bg .card-title { /* Título de tarjeta en sección Darkgrey */
+            color: var(--color-white);
+        }
+        .card-subtitle {
+            color: var(--color-text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        .section-dark-grey-bg .card-subtitle { /* Subtítulo de tarjeta en sección Darkgrey */
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .card-date {
+            color: var(--color-text-light);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .section-dark-grey-bg .card-date { /* Fecha de tarjeta en sección Darkgrey */
+            color: rgba(255, 255, 255, 0.6);
+        }
+        /* Corrección de viñetas dobles */
+        .card-portfolio ul {
+            list-style: none; /* Elimina las viñetas por defecto de Tailwind */
+            padding-left: 0;
+        }
+        .card-list-item {
+            color: var(--color-text-dark);
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+            position: relative; /* Para posicionar la viñeta personalizada */
+            padding-left: 1.25rem; /* Espacio para la viñeta */
+        }
+        .section-dark-grey-bg .card-list-item { /* Ítem de lista en tarjeta de sección Darkgrey */
+            color: var(--color-white);
+        }
+        .card-list-item::before {
+            content: "• ";
+            color: var(--color-pantone-blue);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        .section-dark-grey-bg .card-list-item::before { /* Viñeta en tarjeta de sección Darkgrey */
+            color: var(--color-white);
+        }
+
+
+        /* Habilidades (Tags) */
+        .skill-tag {
+            background-color: rgba(8, 70, 204, 0.1);
+            color: var(--color-pantone-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.9rem;
+            margin: 0.375rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .skill-tag:hover {
+            background-color: var(--color-pantone-blue);
+            color: var(--color-white);
+        }
+
+        /* Botones */
+        .btn-primary {
+            background-color: var(--color-white);
+            color: var(--color-pantone-blue);
+            font-weight: 700;
+            padding: 0.875rem 2.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .section-dark-grey-bg .btn-primary { /* Botón en sección Darkgrey */
+            background-color: var(--color-white);
+            color: var(--color-pantone-blue);
+        }
+        .section-dark-grey-bg .btn-primary:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+
+        /* Iconos de Google Material Symbols */
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+            vertical-align: middle;
+        }
+        .icon-large {
+            font-size: 2.5rem;
+        }
+
+        /* Modales */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: var(--color-white);
+            color: var(--color-text-dark);
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-text-dark);
+            line-height: 1;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--color-pantone-blue);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .modal-questions-title {
+            color: var(--color-pantone-blue);
+            font-weight: 700;
+        }
+        .modal-question-item {
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Gráfico */
+        .chart-container {
+            background-color: var(--color-white);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Alineación y Espaciado de Secciones */
+        main section {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+        @media (min-width: 768px) {
+            main section {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+            }
+        }
+
+        /* Estilos específicos para el formulario de contacto */
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.375rem;
+            font-family: 'Noto Sans', sans-serif;
+            color: var(--color-text-dark);
+            background-color: #f0f0f0;
+        }
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-pantone-blue);
+            box-shadow: 0 0 0 2px rgba(8, 70, 204, 0.2);
+        }
+        .contact-form button[type="submit"] {
+            width: auto;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+        }
+        .contact-form-message {
+            margin-top: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        .contact-form-message.success {
+            color: #10b981; /* green-500 */
+        }
+        .contact-form-message.error {
+            color: #ef4444; /* red-500 */
+        }

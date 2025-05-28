@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Jhonnathan De Jesús Araujo Santana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    
+</head>
+<body class="leading-normal tracking-normal">
+
+    <header class="header-bg shadow-md sticky top-0 z-50 lg:hidden">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-white md:text-2xl">Jhonnathan Santana</div>
+            <button id="mobile-menu-toggle" class="text-white focus:outline-none">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="main-layout-wrapper">
+        <div class="content-area">
+            <section id="inicio" class="hero-section">
+                <div class="container mx-auto px-6 py-16">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpU-sfGSVHUwNUF6ybM6wSdyHSFuMtmAGX0Vw-0b7_bfxBF_deMxpibd5Ukmr7KwoHfo7OWmDz0gKICbBQPrCiBJssqcguIYk2UCOZ3QVsC3DVffznSMQH9cSQ7pFNqO2szsLpZYOJmqTnpTbWmHUz_NoFxB_iQnjj5ZNurrdHuvKoHqQHjXZDMfp7QQPF/s1600/profile-pic%20%289%29.png" alt="Imagen de perfil de Jhonnathan Santana" class="rounded-full w-48 h-48 mx-auto mb-8 object-cover profile-image">
+                    <h1 class="hero-title">Jhonnathan De Jesús Araujo Santana</h1>
+                    <p class="hero-subtitle">Lic. Informática | Infraestructura TI | Seguridad | Facilitador Docente</p>
+                    <p class="hero-text mb-10">
+                        Profesional de TI con trayectoria probada en consultoría, infraestructura y seguridad, y una fuerte vocación por la enseñanza. Especializado en transformar desafíos tecnológicos complejos en soluciones prácticas y comprensibles. Mi experiencia se centra en optimizar sistemas, reducir costos y fortalecer la ciberseguridad, mientras empodero a profesionales y estudiantes para aplicar conocimientos tecnológicos con confianza y generar un impacto real.
+                    </p>
+                    <div class="flex justify-center space-x-6 mb-10">
+                        </div>
+                    <a href="javascript:void(0);" id="contact-me-btn" class="btn-primary inline-block">¿Te Contacto?</a>
+                </div>
+            </section>
+
+            <main>
+                <section id="acerca-de-mi" class="section-light-bg py-16">
+                    <div class="container mx-auto px-6">
+                        <h2 class="section-title text-center">Acerca de Mí 👋</h2>
+                        <div class="max-w-4xl mx-auto text-center text-text-dark">
+                            <p class="text-lg leading-relaxed mb-4">
+                                Mi pasión por la tecnología se combina con una vocación genuina por la enseñanza. Creo firmemente que el conocimiento es más poderoso cuando se comparte y se hace accesible para todos. A lo largo de mi carrera, he tenido el privilegio de no solo construir y optimizar infraestructuras tecnológicas, sino también de capacitar a individuos y equipos, ayudándolos a desmitificar conceptos complejos y a aplicar la tecnología de manera práctica.
+                            </p>
+                            <p class="text-lg leading-relaxed">
+                                Mi experiencia multifacética como consultor, analista y facilitador me permite abordar los desafíos de TI desde diversas perspectivas, siempre buscando soluciones eficientes y sostenibles. Estoy comprometido con el aprendizaje continuo y la adaptación a las tendencias tecnológicas, siempre con el objetivo de generar un impacto positivo y duradero.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="experiencia" class="section-dark-grey-bg py-16">
+                    <div class="container mx-auto px-6">
+                        <h2 class="section-title text-center text-white">Experiencia 💼</h2>
+                        
+                        <h3 class="sub-section-title mb-8 text-white">Profesional</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Consultor Soluciones TI</h4>
+                                    <p class="card-subtitle">SURFUTURO</p>
+                                    <p class="card-date">2025</p>
+                                    <ul>
+                                        <li class="card-list-item">Reducción de gastos de licenciamiento en un 60%.</li>
+                                        <li class="card-list-item">Implementación de nuevas soluciones de seguridad como Microsoft ADR.</li>
+                                        <li class="card-list-item">Creación de nuevas políticas y procesos basados en ITIL y COBIT.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Analista Senior de Monitoreo de TI (Remoto)</h4>
+                                    <p class="card-subtitle">APAP Asociación Dominicana de Ahorros y Prestamos - Santo Domingo, RD</p>
+                                    <p class="card-date">Julio 2022 – Febrero 2025</p>
+                                    <ul>
+                                        <li class="card-list-item">Creación de más de 200 alertas para servicios críticos.</li>
+                                        <li class="card-list-item">Desarrollo de más de 10 soluciones de Dashboard para visualización de datos.</li>
+                                        <li class="card-list-item">Optimización de más de 200 dispositivos de infraestructura.</li>
+                                        <li class="card-list-item">Mejora del seguimiento a los recursos de bases de datos, monitoreando Table Spaces y Data Files.</li>
+                                        <li class="card-list-item">Reducción del tiempo de escalamiento en un 80%.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Técnico de Servicios Recurrentes</h4>
+                                    <p class="card-subtitle">NERDOT - Santo Domingo, RD</p>
+                                    <p class="card-date">Agosto 2017 – Junio 2022</p>
+                                    <ul>
+                                        <li class="card-list-item">Lideré la implementación de la migración de centrales análogas a IP, mejorando significativamente la comunicación.</li>
+                                        <li class="card-list-item">Gestioné la migración del servidor principal, asegurando la continuidad operativa y optimizando el rendimiento.</li>
+                                        <li class="card-list-item">Reestructuré las redes locales con nuevos equipos (Switches, Repetidores) para múltiples oficinas, mejorando la velocidad y estabilidad de conexión.</li>
+                                        <li class="card-list-item">Establecí el enlace de múltiples oficinas mediante fibra óptica, incrementando el ancho de banda y la fiabilidad de la conexión.</li>
+                                        <li class="card-list-item">Realicé el cableado estructurado para 2 pisos de edificios nuevos, habilitando la conectividad para más de 100 puntos de red.</li>
+                                        <li class="card-list-item">Migración de todos sus usuarios a soluciones Microsoft 365.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                             <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Consultor de TI</h4>
+                                    <p class="card-subtitle">NET AC CONSULTING</p>
+                                    <p class="card-date">Octubre 2013 – Enero 2017</p>
+                                    <ul>
+                                        <li class="card-list-item">Soporte y asesoramiento a más de 10 empresas, permitiendo optimizar su infraestructura.</li>
+                                        <li class="card-list-item">Creación e implementación de su sitio web.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="sub-section-title mb-8 text-white mt-16">Docente</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Docente</h4>
+                                    <p class="card-subtitle">ITLA Instituto Tecnológico de Las Américas, Santo Domingo, RD</p>
+                                    <p class="card-date">Enero 2024 – Actual</p>
+                                    <ul>
+                                        <li class="card-list-item">Impartición de cursos avanzados de tecnologías de la información, incluyendo programación y redes.</li>
+                                        <li class="card-list-item">Diseño de material didáctico adaptado a las necesidades del mercado.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Facilitador de la Formación Técnico Profesional</h4>
+                                    <p class="card-subtitle">INFOTEP, Santo Domingo, RD</p>
+                                    <p class="card-date">2013 – Septiembre 2022</p>
+                                    <ul>
+                                        <li class="card-list-item">Desarrollo e impartición de programas de formación en tecnologías de la información.</li>
+                                        <li class="card-list-item">Evaluación del rendimiento de los participantes y retroalimentación constructiva.</li>
+                                        <li class="card-list-item">Actualización del contenido del curso para reflejar las últimas tendencias en TI.</li>
+                                        <li class="card-list-item">Implementación de aula virtual MOODLE.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="sub-section-title mb-8 text-white mt-16">Logros Cuantificables Destacados</h3>
+                        <p class="text-center text-white mb-8 max-w-2xl mx-auto text-lg">
+                            Esta sección visualiza el impacto medible de mis contribuciones en diferentes roles, destacando la eficiencia, la optimización y la capacidad de gestión en proyectos clave.
+                        </p>
+                        <div class="chart-container bg-white p-6 rounded-lg shadow-md">
+                            <canvas id="logrosChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="educacion" class="section-light-bg py-16">
+                    <div class="container mx-auto px-6">
+                        <h2 class="section-title text-center">Educación y Proyectos de Capacitación 🎓</h2>
+                        
+                        <h3 class="sub-section-title mb-8 text-gray-700">Formación Académica</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Maestría en Dirección y Gestión de Tecnologías de la Información</h4>
+                                    <p class="card-subtitle">UNIR – Universidad De La Rioja</p>
+                                    <p class="card-date">(En progreso, finalización 2026)</p>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Licenciatura en Informática</h4>
+                                    <p class="card-subtitle">Universidad Del Caribe</p>
+                                    <p class="card-date">Enero 2019 – Junio 2023</p>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Técnico Superior en Informática (Desarrollo de Software)</h4>
+                                    <p class="card-subtitle">INFOTEP</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="sub-section-title mb-8 text-gray-700">Proyectos y Capacitaciones Impartidas</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Diplomado en Seguridad de la Información</h4>
+                                    <p class="card-subtitle">ITLA (2024)</p>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Fundamentos de Big Data</h4>
+                                    <p class="card-subtitle">2025</p>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Cloud Computing o Diseño y Desarrollo en las Nubes</h4>
+                                    <p class="card-subtitle">2023</p>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Diplomado en Monitoreo y Videovigilancia</h4>
+                                    <p class="card-subtitle">Digital Business Company (2023)</p>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Diplomado en Desarrollo de las TICs</h4>
+                                    <p class="card-subtitle">SURFUTURO (2019)</p>
+                                </div>
+                            </div>
+                            <div class="card-portfolio">
+                                <div class="card-content">
+                                    <h4 class="card-title">Diplomado en Desarrollo de las TICs</h4>
+                                    <p class="card-subtitle">INAFOCAM (2015)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="certificaciones" class="section-light-bg py-16">
+                    <div class="container mx-auto px-6">
+                        <h2 class="section-title text-center">Certificaciones y Formación Adicional 🏆</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="sub-section-title mb-8 text-gray-700">Certificaciones Oficiales</h3>
+                                <div class="card-portfolio p-6">
+                                    <ul>
+                                        <li class="card-list-item">Security, Compliance, and Identity Fundamentals</li>
+                                        <li class="card-list-item">Azure Data Fundamentals, Power Platform Fundamentals, Azure Fundamentals</li>
+                                        <li class="card-list-item">MTA Networking, MTA Windows Server, MTA Security</li>
+                                        <li class="card-list-item">MCE Microsoft Certified Educator</li>
+                                        <li class="card-list-item">MOS Microsoft Office Specialist</li>
+                                        <li class="card-list-item">Fortinet: NS1, NS2, NS3</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="sub-section-title mb-8 text-gray-700">Certificaciones y Diplomados Docentes</h3>
+                                <div class="card-portfolio p-6">
+                                    <ul>
+                                        <li class="card-list-item">Diplomado Desarrollo De Las Competencias Didácticas Para La Excelencia Educativa RD, Universidad Santander (2024)</li>
+                                        <li class="card-list-item">Docente De La Excelencia, ITLA (2024)</li>
+                                        <li class="card-list-item">Diplomada Evaluación De Los Aprendizajes, ITLA (2024)</li>
+                                        <li class="card-list-item">Formación Humana Y Construcción De Ciudadanía, INFOTEP (2024)</li>
+                                        <li class="card-list-item">Certificación Internacional Aprendizaje Combinado y Generatividad Docente 4.0 LINC (2022)</li>
+                                        <li class="card-list-item">Estrategia De Aprendizaje Basado En Proyectos (2022)</li>
+                                        <li class="card-list-item">Actualización Metodológica En Formación Basada En Normas De Competencia Laboral (2016)</li>
+                                        <li class="card-list-item">Tutor Para La Formación En Ambientes Virtuales (2015)</li>
+                                        <li class="card-list-item">Diseño curricular (2014)</li>
+                                        <li class="card-list-item">Facilitador de la Formación Técnico Profesional (2013)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-12 w-full">
+                                <h3 class="sub-section-title mb-8 text-gray-700">Cursos y Diplomados Adicionales (TI y Gestión)</h3>
+                                <div class="card-portfolio p-6">
+                                    <ul>
+                                        <li class="card-list-item">Design Thinking y Scrum, UNIR (En progreso, finalización 2025)</li>
+                                        <li class="card-list-item">DevOps con Docker, Jenkins, Kubernetes, Git, GitFlow CI y CD, Udemy (2024)</li>
+                                        <li class="card-list-item">Microsoft Cybersecurity Architect, ITG (2023)</li>
+                                        <li class="card-list-item">Gestión de proyectos con la metodología Agile, Coursera (2023)</li>
+                                        <li class="card-list-item">Fundamentos Profesionales de Análisis de Datos, LinkedIn (2023)</li>
+                                        <li class="card-list-item">Splunk Experto, Udemy (2023)</li>
+                                        <li class="card-list-item">Programación en JAVA, EOI (2019)</li>
+                                        <li class="card-list-item">CCNA R&S 200-125, Capacity Academy (2018)</li>
+                                        <li class="card-list-item">CompTIA+, Capacity Academy (2017)</li>
+                                        <li class="card-list-item">Diplomado Mandos Medios – INFOTEP</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="habilidades" class="section-light-bg py-16">
+                    <div class="container mx-auto px-6">
+                        <h2 class="section-title text-center">Habilidades 💪</h2>
+                        <div class="card-portfolio p-8">
+                            <div class="flex flex-wrap justify-center">
+                                <span class="skill-tag">Adaptabilidad a cambios tecnológicos</span>
+                                <span class="skill-tag">Comunicación clara de conceptos técnicos</span>
+                                <span class="skill-tag">Empatía y adaptación a perfiles de aprendizaje</span>
+                                <span class="skill-tag">Resolución de conflictos</span>
+                                <span class="skill-tag">Mentoría y seguimiento académico</span>
+                                <span class="skill-tag">Diseño curricular y programas educativos</span>
+                                <span class="skill-tag">ITIL</span>
+                                <span class="skill-tag">COBIT</span>
+                                <span class="skill-tag">Gestión de Proyectos Agile</span>
+                                <span class="skill-tag">Design Thinking</span>
+                                <span class="skill-tag">Scrum</span>
+                                <span class="skill-tag">Infraestructura TI</span>
+                                <span class="skill-tag">Monitoreo de Sistemas</span>
+                                <span class="skill-tag">Microsoft 365</span>
+                                <span class="skill-tag">Azure</span>
+                                <span class="skill-tag">DevOps</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">Jenkins</span>
+                                <span class="skill-tag">Kubernetes</span>
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">GitFlow CI/CD</span>
+                                <span class="skill-tag">Seguridad Informática</span>
+                                <span class="skill-tag">Microsoft Cybersecurity Architect</span>
+                                <span class="skill-tag">Fortinet (NS1, NS2, NS3)</span>
+                                <span class="skill-tag">Ciberseguridad</span>
+                                <span class="skill-tag">SQL</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">KQL</span>
+                                <span class="skill-tag">SPL</span>
+                                <span class="skill-tag">MACRO</span>
+                                <span class="skill-tag">Pascal</span>
+                                <span class="skill-tag">Shell Bash</span>
+                                <span class="skill-tag">Programación</span>
+                                <span class="skill-tag">Inteligencia Artificial</span>
+                                <span class="skill-tag">Análisis de Datos</span>
+                                <span class="skill-tag">Splunk</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contacto" class="section-dark-grey-bg py-16">
+                    <div class="container mx-auto px-6">
+                        <h2 class="section-title text-center text-white">Contacto 📧</h2>
+                        <div class="max-w-lg mx-auto p-8 text-center bg-white rounded-lg shadow-md text-gray-700">
+                            <p class="text-lg mb-3">
+                                <span class="material-symbols-outlined align-middle mr-2">phone</span>
+                                <strong>Teléfono:</strong> (829) 846-4659 | (809) 384-8526
+                            </p>
+                            <p class="text-lg mb-3">
+                                <span class="material-symbols-outlined align-middle mr-2">mail</span>
+                                <strong>Email:</strong> <a href="mailto:Jhonnathansantana@outlook.com" class="text-pantone-blue hover:underline">Jhonnathansantana@outlook.com</a>
+                            </p>
+                            <p class="text-lg mb-3">
+                                <span class="material-symbols-outlined align-middle mr-2">link</span>
+                                <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jhonnathansantana/" target="_blank" rel="noopener noreferrer" class="text-pantone-blue hover:underline">linkedin.com/in/jhonnathansantana</a>
+                            </p>
+                            <p class="text-lg mb-3">
+                                <span class="material-symbols-outlined align-middle mr-2">article</span>
+                                <strong>Blog:</strong> <a href="https://www.jhonnathan.com.do/" target="_blank" rel="noopener noreferrer" class="text-pantone-blue hover:underline">jhonnathan.com.do</a>
+                            </p>
+                            <p class="text-lg">
+                                <span class="material-symbols-outlined align-middle mr-2">location_on</span>
+                                <strong>Ubicación:</strong> Santo Domingo, República Dominicana
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="herramientas" class="section-light-bg py-16">
+                    <div class="container mx-auto px-6">
+                        <h2 class="section-title text-center">Herramientas 🛠️</h2>
+                        <p class="text-center text-text-dark mb-10 max-w-2xl mx-auto text-lg">
+                            Explora funcionalidades interactivas diseñadas para potenciar tu preparación profesional y descubrir nuevas oportunidades.
+                        </p>
+                        <div class="flex flex-col md:flex-row justify-center items-center space-y-6 md:space-y-0 md:space-x-6">
+                            <button id="generate-questions-btn" class="btn-primary flex items-center space-x-2 px-8 py-4 text-lg">
+                                <span class="material-symbols-outlined">psychology</span>
+                                <span>✨ Generar Preguntas de Entrevista</span>
+                            </button>
+                            <button id="recommended-profiles-btn" class="btn-primary flex items-center space-x-2 px-8 py-4 text-lg">
+                                <span class="material-symbols-outlined">person_search</span>
+                                <span>🔍 Perfiles Recomendados</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="header-bg text-white text-center p-6 mt-12">
+                <p class="text-sm">&copy; <span id="currentYear"></span> Jhonnathan De Jesús Araujo Santana. Todos los derechos reservados.</p>
+            </footer>
+        </div>
+
+        <aside class="fixed-right-menu hidden lg:flex">
+            <div class="flex flex-col items-center mb-8">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpU-sfGSVHUwNUF6ybM6wSdyHSFuMtmAGX0Vw-0b7_bfxBF_deMxpibd5Ukmr7KwoHfo7OWmDz0gKICbBQPrCiBJssqcguIYk2UCOZ3QVsC3DVffznSMQH9cSQ7pFNqO2szsLpZYOJmqTnpTbWmHUz_NoFxB_iQnjj5ZNurrdHuvKoHqQHjXZDMfp7QQPF/s1600/profile-pic%20%289%29.png" alt="Perfil" class="rounded-full w-24 h-24 object-cover mb-4 border-2 border-white">
+                <h4 class="text-xl font-bold text-white">Jhonnathan Santana</h4>
+                <p class="text-sm text-gray-400">Consultor TI | Docente</p>
+            </div>
+            <nav class="flex flex-col w-full">
+                <a class="nav-link text-base" href="#inicio"><span class="material-symbols-outlined">home</span>Inicio</a>
+                <a class="nav-link text-base" href="#acerca-de-mi"><span class="material-symbols-outlined">person</span>Acerca de Mí</a>
+                <a class="nav-link text-base" href="#experiencia"><span class="material-symbols-outlined">work</span>Experiencia</a>
+                <a class="nav-link text-base" href="#educacion"><span class="material-symbols-outlined">school</span>Educación</a>
+                <a class="nav-link text-base" href="#certificaciones"><span class="material-symbols-outlined">verified</span>Certificaciones</a>
+                <a class="nav-link text-base" href="#habilidades"><span class="material-symbols-outlined">handyman</span>Habilidades</a>
+                <a class="nav-link text-base" href="#contacto"><span class="material-symbols-outlined">mail</span>Contacto</a>
+                <a class="nav-link text-base" href="#herramientas"><span class="material-symbols-outlined">build</span>Herramientas</a>
+                <a class="nav-link text-base" href="https://www.jhonnathan.com.do/" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">article</span>Blog</a>
+            </nav>
+        </aside>
+    </div>
+
+    <div id="mobile-menu-overlay" class="modal-overlay hidden"></div>
+    <div id="mobile-menu-content" class="hidden">
+        <button id="close-mobile-menu-btn" class="close-btn">&times;</button>
+        <div class="flex flex-col items-center mb-8 w-full">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpU-sfGSVHUwNUF6ybM6wSdyHSFuMtmAGX0Vw-0b7_bfxBF_deMxpibd5Ukmr7KwoHfo7OWmDz0gKICbBQPrCiBJssqcguIYk2UCOZ3QVsC3DVffznSMQH9cSQ7pFNqO2szsLpZYOJmqTnpTbWmHUz_NoFxB_iQnjj5ZNurrdHuvKoHqQHjXZDMfp7QQPF/s1600/profile-pic%20%289%29.png" alt="Perfil" class="rounded-full w-24 h-24 object-cover mb-4 border-2 border-white">
+            <h4 class="text-xl font-bold text-white">Jhonnathan Santana</h4>
+            <p class="text-sm text-gray-400">Consultor TI | Docente</p>
+        </div>
+        <nav class="flex flex-col w-full">
+            <a class="nav-link text-base" href="#inicio"><span class="material-symbols-outlined">home</span>Inicio</a>
+            <a class="nav-link text-base" href="#acerca-de-mi"><span class="material-symbols-outlined">person</span>Acerca de Mí</a>
+            <a class="nav-link text-base" href="#experiencia"><span class="material-symbols-outlined">work</span>Experiencia</a>
+            <a class="nav-link text-base" href="#educacion"><span class="material-symbols-outlined">school</span>Educación</a>
+            <a class="nav-link text-base" href="#certificaciones"><span class="material-symbols-outlined">verified</span>Certificaciones</a>
+            <a class="nav-link text-base" href="#habilidades"><span class="material-symbols-outlined">handyman</span>Habilidades</a>
+            <a class="nav-link text-base" href="#contacto"><span class="material-symbols-outlined">mail</span>Contacto</a>
+            <a class="nav-link text-base" href="#herramientas"><span class="material-symbols-outlined">build</span>Herramientas</a>
+            <a class="nav-link text-base" href="https://www.jhonnathan.com.do/" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">article</span>Blog</a>
+        </nav>
+    </div>
+
+    <div id="interview-questions-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-modal-btn">&times;</button>
+            <h3 class="text-2xl font-bold mb-4 modal-questions-title">Preguntas de Entrevista Generadas ✨</h3>
+            <div id="modal-loading-spinner" class="hidden text-center">
+                <div class="loading-spinner"></div>
+                <p class="mt-2 text-gray-600">Generando preguntas...</p>
+            </div>
+            <div id="modal-questions-content" class="text-gray-700 leading-relaxed space-y-4">
+                </div>
+        </div>
+    </div>
+
+    <div id="recommended-profiles-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-profiles-modal-btn">&times;</button>
+            <h3 class="text-2xl font-bold mb-4 modal-questions-title">Perfiles Recomendados para ti 💡</h3>
+            <div id="profiles-modal-loading-spinner" class="hidden text-center">
+                <div class="loading-spinner"></div>
+                <p class="mt-2 text-gray-600">Analizando tu perfil...</p>
+            </div>
+            <div id="profiles-modal-content" class="text-gray-700 leading-relaxed space-y-4">
+                </div>
+        </div>
+    </div>
+
+    <div id="contact-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-contact-modal-btn">&times;</button>
+            <h3 class="text-2xl font-bold mb-4 modal-questions-title">¿Te Contacto? ✉️</h3>
+            <div id="contact-form-loading-spinner" class="hidden text-center">
+                <div class="loading-spinner"></div>
+                <p class="mt-2 text-gray-600">Enviando mensaje...</p>
+            </div>
+            <form id="contact-form" class="contact-form">
+                <label for="contact-name">Nombre:</label>
+                <input type="text" id="contact-name" name="name" required>
+
+                <label for="contact-email">Tu Correo Electrónico:</label>
+                <input type="email" id="contact-email" name="email" required>
+
+                <label for="contact-message">Mensaje:</label>
+                <textarea id="contact-message" name="message" rows="5" required></textarea>
+
+                <button type="submit" class="btn-primary mt-4">Enviar Mensaje</button>
+                <p id="contact-form-status" class="contact-form-message hidden"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        
+    </script>
+</body>
+</html>
