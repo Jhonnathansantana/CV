@@ -1,0 +1,182 @@
+{
+  "basics": {
+    "name": "Jhonnathan De Jesús Araujo Santana",
+    "label": "Gerente de Tecnología de la Información · Ciberseguridad · DevOps · Docente",
+    "image": "mifoto.jpeg",
+    "email": "Jhonnathansantana@outlook.com",
+    "phone": "(829) 846-4659",
+    "url": "https://www.jhonnathan.com.do",
+    "summary": "Profesional de TI con más de 15 años de experiencia en gestión de infraestructura, ciberseguridad, consultoría y docencia. Liderando la transformación digital en Fundación Sur Futuro y formando nuevas generaciones en ITLA e INFOTEP.",
+    "location": {
+      "city": "Santo Domingo Este",
+      "countryCode": "DO"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "jhonnathansantana",
+        "url": "https://www.linkedin.com/in/jhonnathansantana/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "position": "Gerente de Tecnología de la Información",
+      "company": "Fundación Sur Futuro",
+      "location": "Santo Domingo, RD",
+      "startDate": "2025-07",
+      "current": true,
+      "highlights": [
+        "Dirección estratégica del área de TI, alineando tecnología con objetivos institucionales",
+        "Supervisión de infraestructura, seguridad de redes y continuidad del negocio",
+        "Gestión de proveedores tecnológicos y presupuesto del departamento",
+        "Implementación de políticas de ciberseguridad y gobierno de TI"
+      ]
+    },
+    {
+      "position": "Consultor de Soluciones de TI",
+      "company": "Fundación Sur Futuro",
+      "location": "Santo Domingo, RD",
+      "startDate": "2024-08",
+      "endDate": "2025-09",
+      "highlights": [
+        "Diagnóstico y optimización de infraestructura tecnológica institucional",
+        "Definición de hoja de ruta para la modernización de sistemas",
+        "Reducción de gastos de licenciamiento en un 60%",
+        "Implementación de soluciones de seguridad como Microsoft ADR"
+      ]
+    },
+    {
+      "position": "Analista Senior de Monitoreo de TI (MSTI)",
+      "company": "APAP — Asociación Popular de Ahorros y Préstamos",
+      "location": "Santo Domingo, RD",
+      "startDate": "2022-07",
+      "endDate": "2025-03",
+      "highlights": [
+        "Supervisión de plataformas: APPManager, OPManager, Splunk y Azure Monitor",
+        "Análisis de disponibilidad y rendimiento para resolución proactiva de incidentes",
+        "Generación de informes ejecutivos con métricas de SLA",
+        "Implementación de alertas y dashboards para sistemas críticos financieros"
+      ]
+    },
+    {
+      "position": "Experto TI B2B — SysAdmin, Redes & Seguridad",
+      "company": "Nerdot",
+      "location": "República Dominicana",
+      "startDate": "2017-07",
+      "endDate": "2022-07",
+      "highlights": [
+        "Soporte técnico recurrente B2B: SysAdmin, respaldos, central IP y seguridad de redes",
+        "Gestión de proyectos de implementación y mejora de infraestructura",
+        "Migración de centrales análogas a IP y de usuarios a Microsoft 365",
+        "Documentación de incidencias y base de conocimientos técnica"
+      ]
+    },
+    {
+      "position": "Consultor de TI",
+      "company": "NetAc Consulting",
+      "location": "República Dominicana",
+      "startDate": "2013-10",
+      "endDate": "2023-01",
+      "highlights": [
+        "Asesoramiento a empresas en implementación y optimización de infraestructura TI",
+        "Diseño y ejecución de proyectos de modernización tecnológica",
+        "Capacitación de personal en tecnologías implementadas"
+      ]
+    },
+    {
+      "position": "Encargado de Tecnología",
+      "company": "Centro de Capacitación Juan Bosch",
+      "location": "Santo Domingo, RD",
+      "startDate": "2009-06",
+      "endDate": "2016",
+      "highlights": [
+        "Gestión integral de la infraestructura tecnológica del centro",
+        "Soporte técnico a formadores y personal administrativo"
+      ]
+    },
+    {
+      "position": "Docente — Tecnología de la Información",
+      "company": "ITLA — Instituto Tecnológico de Las Américas",
+      "location": "Santo Domingo, RD",
+      "startDate": "2023-11",
+      "current": true,
+      "highlights": [
+        "Cursos avanzados: programación, redes, infraestructura y ciberseguridad",
+        "Diseño de material didáctico adaptado al mercado laboral TI",
+        "Mentoría en proyectos académicos y profesionales"
+      ]
+    },
+    {
+      "position": "Facilitador de Formación Técnico Profesional",
+      "company": "INFOTEP",
+      "location": "Santo Domingo, RD",
+      "startDate": "2012-01",
+      "current": true,
+      "highlights": [
+        "Impartición de programas de formación técnica en TI a nivel nacional",
+        "Evaluación del rendimiento de participantes y retroalimentación constructiva"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "UASD — Universidad Autónoma de Santo Domingo",
+      "area": "Auditoría y Seguridad Informática",
+      "studyType": "Maestría",
+      "startDate": "2026-04",
+      "endDate": "2028-04",
+      "current": true
+    },
+    {
+      "institution": "UNIR — Universidad Internacional de La Rioja (México)",
+      "area": "Dirección y Gestión de Tecnologías de la Información",
+      "studyType": "Maestría",
+      "startDate": "2024-10",
+      "endDate": "2026-06",
+      "current": true
+    },
+    {
+      "institution": "Universidad del Caribe — UNICARIBE",
+      "area": "Informática",
+      "studyType": "Licenciatura",
+      "startDate": "2019-01",
+      "endDate": "2023-06"
+    },
+    {
+      "institution": "INFOTEP",
+      "area": "Desarrollo de Software",
+      "studyType": "Técnico Superior"
+    }
+  ],
+  "certificates": [
+    {"name": "Azure Fundamentals (AZ-900)", "issuer": "Microsoft", "date": "2023"},
+    {"name": "Azure Data Fundamentals (DP-900)", "issuer": "Microsoft", "date": "2023"},
+    {"name": "Security, Compliance & Identity (SC-900)", "issuer": "Microsoft", "date": "2023"},
+    {"name": "Power Platform Fundamentals (PL-900)", "issuer": "Microsoft", "date": "2023"},
+    {"name": "Microsoft Certified Educator (MCE)", "issuer": "Microsoft", "date": "2018"},
+    {"name": "Fortinet NSE1, NSE2, NSE3", "issuer": "Fortinet"},
+    {"name": "Design Thinking y Scrum", "issuer": "UNIR", "date": "2025"},
+    {"name": "Gestión de Proyectos con Agile", "issuer": "Coursera / Google", "date": "2023"},
+    {"name": "CCNA R&S 200-125", "issuer": "Capacity Academy", "date": "2018"},
+    {"name": "CompTIA+", "issuer": "Capacity Academy", "date": "2017"},
+    {"name": "Facilitador de la Formación Profesional", "issuer": "INFOTEP", "date": "2025-05"}
+  ],
+  "skills": [
+    {"name": "Monitoreo & Observabilidad", "keywords": ["Splunk", "Azure Monitor", "OPManager", "APPManager"]},
+    {"name": "Cloud & Azure", "keywords": ["AZ-900", "DP-900", "SC-900", "PL-900", "Azure AD", "Microsoft 365"]},
+    {"name": "DevOps", "keywords": ["Docker", "Kubernetes", "Jenkins", "Git", "CI/CD"]},
+    {"name": "Redes & Seguridad", "keywords": ["Fortinet NSE", "CCNA", "Ciberseguridad", "Microsoft ADR"]},
+    {"name": "SysAdmin", "keywords": ["Windows Server", "Linux", "Active Directory", "SQL", "Python", "KQL", "SPL", "Shell Bash"]},
+    {"name": "Metodologías", "keywords": ["Agile", "Scrum", "Design Thinking", "ITIL", "COBIT"]},
+    {"name": "Docencia", "keywords": ["INFOTEP", "ITLA", "E-learning", "Diseño curricular", "Mentoría"]}
+  ],
+  "languages": [
+    {"language": "Español", "fluency": "Nativo"},
+    {"language": "Inglés", "fluency": "Intermedio"}
+  ],
+  "references": [
+    {"name": "Docente Frank Sánchez", "phone": "(809) 837-0174"},
+    {"name": "Lic. Marcos Ascevedo", "phone": "(829) 921-9523"}
+  ]
+}

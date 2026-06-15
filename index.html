@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jhonnathan Santana — Portfolio</title>
+    <title>Jhonnathan Santana — Portfolio Profesional</title>
+    <meta name="description" content="Gerente de Tecnología de la Información con 15+ años en ciberseguridad, DevOps, infraestructura y docencia. Portfolio profesional de Jhonnathan De Jesús Araujo Santana.">
+    <meta property="og:title" content="Jhonnathan Santana — Portfolio Profesional">
+    <meta property="og:description" content="Gerente TI · Ciberseguridad · DevOps · Docente. 15+ años de experiencia. Descarga CV en PDF.">
+    <meta property="og:image" content="mifoto.jpeg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%237a9e87'/><text x='16' y='22' text-anchor='middle' fill='white' font-size='18' font-family='Inter,sans-serif' font-weight='700'>JS</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         :root {
             --cream: #faf8f5;
@@ -29,6 +37,43 @@
             --radius-lg: 20px;
             --radius-xl: 28px;
             --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --nav-bg: rgba(250, 248, 245, 0.85);
+            --card-bg: #ffffff;
+            --section-alt-bg: #ffffff;
+            --tag-sage-bg: #e8f0ea; --tag-sage-tx: #4a6b55;
+            --tag-lav-bg: #f0ecf6; --tag-lav-tx: #6b5b8a;
+            --tag-rose-bg: #f8eeee; --tag-rose-tx: #8b6b6b;
+            --tag-sky-bg: #eaf0f6; --tag-sky-tx: #5b7a95;
+            --tag-cream-bg: #f5f0e8; --tag-cream-tx: #8a7a5b;
+            --modal-overlay: rgba(0,0,0,0.4);
+        }
+        body.dark {
+            --cream: #1a1a1e;
+            --white: #252528;
+            --sage: #2a3a2e;
+            --sage-deep: #8bb89a;
+            --lavender: #2a2535;
+            --lavender-deep: #a899c4;
+            --rose: #352828;
+            --rose-deep: #c4a0a0;
+            --sky: #222a35;
+            --sky-deep: #8baac4;
+            --text: #e8e6e3;
+            --text-soft: #b0ada8;
+            --text-muted: #7a7772;
+            --border: #3a3834;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+            --nav-bg: rgba(26, 26, 30, 0.9);
+            --card-bg: #252528;
+            --section-alt-bg: #252528;
+            --tag-sage-bg: #2a3a2e; --tag-sage-tx: #8bb89a;
+            --tag-lav-bg: #2a2535; --tag-lav-tx: #a899c4;
+            --tag-rose-bg: #352828; --tag-rose-tx: #c4a0a0;
+            --tag-sky-bg: #222a35; --tag-sky-tx: #8baac4;
+            --tag-cream-bg: #2a2820; --tag-cream-tx: #b8a87a;
+            --modal-overlay: rgba(0,0,0,0.7);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,19 +85,34 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            transition: background 0.4s, color 0.4s;
+        }
+
+        /* ── Skip Link ── */
+        .skip-link {
+            position: absolute; top: -100px; left: 8px;
+            background: var(--sage-deep); color: white;
+            padding: 8px 16px; border-radius: var(--radius-sm);
+            z-index: 200; font-weight: 600; text-decoration: none;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 8px; }
+
+        /* ── Progress Bar ── */
+        .progress-bar {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--sage-deep), var(--lavender-deep));
+            z-index: 200; transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
         }
 
         /* ── Scroll Reveal ── */
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
+            opacity: 0; transform: translateY(30px);
             transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
                         transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
         .reveal-delay-1 { transition-delay: 0.1s; }
         .reveal-delay-2 { transition-delay: 0.2s; }
         .reveal-delay-3 { transition-delay: 0.3s; }
@@ -61,634 +121,423 @@
 
         /* ── Navigation ── */
         .nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(250, 248, 245, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            position: sticky; top: 0; z-index: 100;
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            padding: 0 2rem;
-            transition: background 0.3s, box-shadow 0.3s;
+            padding: 0 2rem; transition: background 0.3s, box-shadow 0.3s;
         }
-        .nav.scrolled {
-            background: rgba(250, 248, 245, 0.97);
-            box-shadow: var(--shadow-sm);
-        }
+        .nav.scrolled { background: var(--nav-bg); box-shadow: var(--shadow-sm); }
         .nav-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 56px;
+            max-width: 1100px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; height: 56px;
         }
-        .nav-brand {
-            font-weight: 700;
-            font-size: 1.05rem;
-            color: var(--text);
-            letter-spacing: -0.3px;
-        }
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-        }
+        .nav-brand { font-weight: 700; font-size: 1.05rem; color: var(--text); letter-spacing: -0.3px; }
+        .nav-links { display: flex; gap: 1.5rem; align-items: center; }
         .nav-links a {
-            text-decoration: none;
-            color: var(--text-soft);
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: color var(--transition);
-            position: relative;
+            text-decoration: none; color: var(--text-soft);
+            font-size: 0.875rem; font-weight: 500;
+            transition: color var(--transition); position: relative;
         }
         .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--sage-deep);
-            border-radius: 1px;
-            transition: width var(--transition);
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: var(--sage-deep);
+            border-radius: 1px; transition: width var(--transition);
         }
-        .nav-links a:hover { color: var(--text); }
-        .nav-links a:hover::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--text); }
+        .nav-links a.active::after { width: 100%; }
 
-        /* Mobile menu toggle */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            z-index: 101;
+        .nav-actions { display: flex; gap: 0.5rem; align-items: center; }
+        .btn-icon {
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 1px solid var(--border); background: var(--card-bg);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all var(--transition); color: var(--text-soft);
         }
-        .menu-toggle span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: var(--text);
-            border-radius: 2px;
-            transition: all 0.3s;
-            margin: 5px 0;
-        }
+        .btn-icon:hover { border-color: var(--sage-deep); color: var(--sage-deep); }
+        .btn-icon svg { width: 18px; height: 18px; }
+
+        .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; z-index: 101; }
+        .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; margin: 5px 0; }
         .menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
         .menu-toggle.open span:nth-child(2) { opacity: 0; }
         .menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(250, 248, 245, 0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 99;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
         }
-        .mobile-menu.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .mobile-menu.open { opacity: 1; pointer-events: auto; }
         .mobile-menu a {
-            text-decoration: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            transition: color var(--transition);
+            text-decoration: none; color: var(--text); font-size: 1.5rem; font-weight: 600;
+            letter-spacing: -0.5px; transition: color var(--transition), transform 0.3s, opacity 0.3s;
+            opacity: 0; transform: translateY(20px);
         }
+        .mobile-menu.open a { opacity: 1; transform: translateY(0); }
+        .mobile-menu.open a:nth-child(1) { transition-delay: 0.05s; }
+        .mobile-menu.open a:nth-child(2) { transition-delay: 0.1s; }
+        .mobile-menu.open a:nth-child(3) { transition-delay: 0.15s; }
+        .mobile-menu.open a:nth-child(4) { transition-delay: 0.2s; }
+        .mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
+        .mobile-menu.open a:nth-child(6) { transition-delay: 0.3s; }
         .mobile-menu a:hover { color: var(--sage-deep); }
 
         .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--sage-deep);
-            color: white;
-            padding: 8px 18px;
-            border-radius: var(--radius-xl);
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all var(--transition);
-            border: none;
-            cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--sage-deep); color: white;
+            padding: 8px 18px; border-radius: var(--radius-xl);
+            font-size: 0.875rem; font-weight: 600; text-decoration: none;
+            transition: all var(--transition); border: none; cursor: pointer;
         }
-        .btn-download:hover {
-            background: #5e8a6e;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
-        }
+        .btn-download:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: var(--shadow-md); }
         .btn-download svg { width: 16px; height: 16px; }
 
         /* ── Hero ── */
         .hero {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 5rem 2rem 4rem;
-            display: flex;
-            align-items: center;
-            gap: 3rem;
+            max-width: 1100px; margin: 0 auto; padding: 5rem 2rem 4rem;
+            display: flex; align-items: center; gap: 3rem;
         }
         .hero-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            flex-shrink: 0;
-            box-shadow: var(--shadow-lg);
-            border: 3px solid var(--white);
+            width: 180px; height: 180px; border-radius: 50%; object-fit: cover;
+            flex-shrink: 0; box-shadow: var(--shadow-lg); border: 3px solid var(--white);
             animation: heroFloat 6s ease-in-out infinite;
         }
-        @keyframes heroFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-        .hero-content h1 {
-            font-size: 2.75rem;
-            font-weight: 700;
-            letter-spacing: -1.2px;
-            line-height: 1.1;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-        }
-        .hero-content .subtitle {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--sage-deep);
-            margin-bottom: 1rem;
-            letter-spacing: -0.2px;
-        }
-        .hero-content .bio {
-            font-size: 1rem;
-            color: var(--text-soft);
-            max-width: 560px;
-            line-height: 1.7;
-        }
-        .hero-actions {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
+        @keyframes heroFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        .hero-content h1 { font-size: 2.75rem; font-weight: 700; letter-spacing: -1.2px; line-height: 1.1; color: var(--text); margin-bottom: 0.5rem; }
+        .hero-content .subtitle { font-size: 1.1rem; font-weight: 500; color: var(--sage-deep); margin-bottom: 1rem; letter-spacing: -0.2px; }
+        .hero-content .bio { font-size: 1rem; color: var(--text-soft); max-width: 560px; line-height: 1.7; }
+        .hero-actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
         .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--white);
-            color: var(--text);
-            padding: 8px 18px;
-            border-radius: var(--radius-xl);
-            font-size: 0.875rem;
-            font-weight: 500;
-            text-decoration: none;
-            border: 1px solid var(--border);
-            transition: all var(--transition);
-            cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--card-bg); color: var(--text);
+            padding: 8px 18px; border-radius: var(--radius-xl);
+            font-size: 0.875rem; font-weight: 500; text-decoration: none;
+            border: 1px solid var(--border); transition: all var(--transition); cursor: pointer;
         }
-        .btn-outline:hover {
-            border-color: var(--sage-deep);
-            color: var(--sage-deep);
-            box-shadow: var(--shadow-sm);
-        }
+        .btn-outline:hover { border-color: var(--sage-deep); color: var(--sage-deep); box-shadow: var(--shadow-sm); }
 
-        /* ── Stats Row ── */
-        .stats-row {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--sage-deep);
-            letter-spacing: -0.5px;
-            line-height: 1;
-        }
-        .stat-label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 0.25rem;
-        }
+        .stats-row { display: flex; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 2rem; font-weight: 700; color: var(--sage-deep); letter-spacing: -0.5px; line-height: 1; }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.25rem; }
 
         /* ── Sections ── */
-        .section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-        .section-alt {
-            background: var(--white);
-            border-radius: var(--radius-xl);
-            margin: 2rem auto;
-            max-width: 1100px;
-            padding: 3rem 2rem;
-            box-shadow: var(--shadow-sm);
-        }
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 0.25rem;
-            color: var(--text);
-        }
-        .section-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
+        .section { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+        .section-alt { background: var(--section-alt-bg); border-radius: var(--radius-xl); margin: 2rem auto; max-width: 1100px; padding: 3rem 2rem; box-shadow: var(--shadow-sm); }
+        .section-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 0.25rem; color: var(--text); }
+        .section-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2rem; }
 
-        /* ── Cards Grid ── */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.25rem;
+        /* ── Badges ── */
+        .badge {
+            display: inline-block; padding: 2px 10px; border-radius: var(--radius-xl);
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase;
         }
+        .badge-current { background: #d4ede0; color: #3a6b4a; }
+        body.dark .badge-current { background: #2a4a35; color: #8bb89a; }
+        .badge-ongoing { background: #e8e0f2; color: #6b4a8a; }
+        body.dark .badge-ongoing { background: #352a45; color: #a899c4; }
+
+        /* ── Cards ── */
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.25rem; }
         .card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            transition: all var(--transition);
-            box-shadow: var(--shadow-sm);
-            cursor: default;
-        }
-        .card:hover {
-            box-shadow: var(--shadow-md);
-            transform: translateY(-3px);
-            border-color: var(--sage);
-        }
-        .card-title {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.2rem;
-            letter-spacing: -0.2px;
-        }
-        .card-org {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--sage-deep);
-            margin-bottom: 0.15rem;
-        }
-        .card-date {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-            font-weight: 400;
-        }
-        .card-bullets {
-            list-style: none;
-            padding: 0;
-        }
-        .card-bullets li {
-            font-size: 0.85rem;
-            color: var(--text-soft);
-            padding: 0.2rem 0;
-            padding-left: 1rem;
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: var(--radius-md); padding: 1.5rem;
+            transition: all var(--transition); box-shadow: var(--shadow-sm); cursor: default;
             position: relative;
-            line-height: 1.5;
         }
-        .card-bullets li::before {
-            content: "—";
-            position: absolute;
-            left: 0;
-            color: var(--text-muted);
+        .card.current { border-left: 3px solid var(--sage-deep); }
+        .card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: var(--sage); }
+        .card-title { font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.2rem; letter-spacing: -0.2px; }
+        .card-org { font-size: 0.85rem; font-weight: 500; color: var(--sage-deep); margin-bottom: 0.15rem; }
+        .card-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; font-weight: 400; }
+        .card-bullets { list-style: none; padding: 0; }
+        .card-bullets li { font-size: 0.85rem; color: var(--text-soft); padding: 0.2rem 0; padding-left: 1rem; position: relative; line-height: 1.5; }
+        .card-bullets li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
+
+        /* ── Timeline ── */
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before {
+            content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+            width: 2px; background: var(--border); border-radius: 1px;
         }
+        .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 1.5rem; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -1.65rem; top: 0.5rem;
+            width: 12px; height: 12px; border-radius: 50%;
+            background: var(--sage-deep); border: 2px solid var(--cream);
+            z-index: 1;
+        }
+        .timeline-item.current::before { background: var(--lavender-deep); box-shadow: 0 0 0 4px rgba(139,125,170,0.2); }
+        .timeline-card {
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: var(--radius-md); padding: 1.25rem;
+            box-shadow: var(--shadow-sm); transition: all var(--transition);
+        }
+        .timeline-card:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+        .timeline-card .card-title { font-size: 1rem; }
+        .timeline-card .card-org { font-size: 0.8rem; }
+        .timeline-card .card-date { font-size: 0.75rem; margin-bottom: 0.5rem; }
+        .timeline-card .card-bullets li { font-size: 0.8rem; }
+
+        /* ── Filter Tabs ── */
+        .filter-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .filter-tab {
+            padding: 6px 16px; border-radius: var(--radius-xl);
+            font-size: 0.8rem; font-weight: 600; cursor: pointer;
+            border: 1px solid var(--border); background: var(--card-bg);
+            color: var(--text-soft); transition: all var(--transition);
+            user-select: none;
+        }
+        .filter-tab:hover { border-color: var(--sage-deep); color: var(--sage-deep); }
+        .filter-tab.active { background: var(--sage-deep); color: white; border-color: var(--sage-deep); }
 
         /* ── Tags ── */
-        .tag-group {
-            margin-bottom: 1.5rem;
-        }
+        .tag-group { margin-bottom: 1.5rem; }
         .tag-group-title {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: color var(--transition);
-            user-select: none;
+            font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.8px; color: var(--text-muted);
+            margin-bottom: 0.5rem; cursor: pointer; transition: color var(--transition); user-select: none;
         }
-        .tag-group-title:hover { color: var(--sage-deep); }
-        .tag-group-title.active { color: var(--sage-deep); }
-        .tag-cloud {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
+        .tag-group-title:hover, .tag-group-title.active { color: var(--sage-deep); }
+        .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.4rem; }
         .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: var(--radius-xl);
-            font-size: 0.8rem;
-            font-weight: 500;
+            display: inline-block; padding: 4px 12px; border-radius: var(--radius-xl);
+            font-size: 0.8rem; font-weight: 500;
             transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-            cursor: pointer;
-            user-select: none;
+            cursor: pointer; user-select: none; position: relative;
         }
-        .tag:hover {
-            transform: scale(1.08);
-        }
-        .tag:active {
-            transform: scale(0.95);
-        }
-        .tag.dimmed {
-            opacity: 0.25;
-            transform: scale(0.95);
-        }
-        .tag-sage { background: #e8f0ea; color: #4a6b55; }
-        .tag-lavender { background: #f0ecf6; color: #6b5b8a; }
-        .tag-rose { background: #f8eeee; color: #8b6b6b; }
-        .tag-sky { background: #eaf0f6; color: #5b7a95; }
-        .tag-cream { background: #f5f0e8; color: #8a7a5b; }
+        .tag:hover { transform: scale(1.08); z-index: 2; }
+        .tag:active { transform: scale(0.95); }
+        .tag.dimmed { opacity: 0.25; transform: scale(0.95); }
+        .tag-sage { background: var(--tag-sage-bg); color: var(--tag-sage-tx); }
+        .tag-lavender { background: var(--tag-lav-bg); color: var(--tag-lav-tx); }
+        .tag-rose { background: var(--tag-rose-bg); color: var(--tag-rose-tx); }
+        .tag-sky { background: var(--tag-sky-bg); color: var(--tag-sky-tx); }
+        .tag-cream { background: var(--tag-cream-bg); color: var(--tag-cream-tx); }
 
-        /* ── Cert list ── */
-        .cert-list {
-            list-style: none;
-            padding: 0;
-            columns: 2;
-            column-gap: 2rem;
+        /* Tooltip */
+        .tag[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+            background: var(--text); color: var(--cream); padding: 4px 10px;
+            border-radius: var(--radius-sm); font-size: 0.7rem; font-weight: 400;
+            white-space: nowrap; z-index: 10; pointer-events: none;
         }
-        .cert-list li {
-            font-size: 0.85rem;
-            color: var(--text-soft);
-            padding: 0.3rem 0;
-            break-inside: avoid;
-            line-height: 1.5;
-            transition: color var(--transition);
+
+        /* ── Cert Tabs ── */
+        .cert-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .cert-tab {
+            padding: 8px 20px; border-radius: var(--radius-xl);
+            font-size: 0.85rem; font-weight: 600; cursor: pointer;
+            border: 1px solid var(--border); background: var(--card-bg);
+            color: var(--text-soft); transition: all var(--transition); user-select: none;
+            display: flex; align-items: center; gap: 6px;
         }
+        .cert-tab:hover { border-color: var(--sage-deep); }
+        .cert-tab.active { background: var(--sage-deep); color: white; border-color: var(--sage-deep); }
+        .cert-tab svg { width: 16px; height: 16px; }
+        .cert-panel { display: none; }
+        .cert-panel.active { display: block; }
+        .cert-list { list-style: none; padding: 0; columns: 2; column-gap: 2rem; }
+        .cert-list li { font-size: 0.85rem; color: var(--text-soft); padding: 0.3rem 0; break-inside: avoid; line-height: 1.5; transition: color var(--transition); }
         .cert-list li:hover { color: var(--text); }
-        .cert-list li strong {
-            color: var(--text);
-            font-weight: 600;
+        .cert-list li strong { color: var(--text); font-weight: 600; }
+
+        /* ── Radar Chart ── */
+        .radar-container { max-width: 500px; margin: 2rem auto 0; }
+        .radar-container canvas { max-height: 380px; }
+
+        /* ── Languages ── */
+        .lang-dots { display: flex; gap: 3px; }
+        .lang-dot { width: 14px; height: 6px; border-radius: 3px; background: var(--border); }
+        .lang-dot.filled { background: var(--sage-deep); }
+
+        /* ── References Carousel ── */
+        .carousel { position: relative; overflow: hidden; }
+        .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+        .carousel-card {
+            min-width: 100%; padding: 2rem; text-align: center;
+            background: var(--card-bg); border: 1px solid var(--border);
+            border-radius: var(--radius-md); box-shadow: var(--shadow-sm);
         }
+        .carousel-card blockquote { font-size: 1rem; color: var(--text-soft); font-style: italic; margin-bottom: 1rem; line-height: 1.6; }
+        .carousel-card cite { font-size: 0.85rem; color: var(--sage-deep); font-weight: 600; font-style: normal; }
+        .carousel-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); border: none; cursor: pointer; transition: background var(--transition); }
+        .carousel-dot.active { background: var(--sage-deep); }
 
         /* ── Contact ── */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
         .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            padding: 0.75rem 1rem;
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            font-size: 0.9rem;
-            color: var(--text-soft);
-            text-decoration: none;
-            transition: all var(--transition);
-            position: relative;
-            overflow: hidden;
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 0.75rem 1rem; background: var(--card-bg);
+            border: 1px solid var(--border); border-radius: var(--radius-md);
+            font-size: 0.9rem; color: var(--text-soft); text-decoration: none;
+            transition: all var(--transition); position: relative; overflow: hidden; cursor: pointer;
         }
-        .contact-item:hover {
-            border-color: var(--sage-deep);
-            box-shadow: var(--shadow-sm);
-            transform: translateY(-2px);
-        }
-        .contact-item:active {
-            transform: scale(0.97);
-        }
+        .contact-item:hover { border-color: var(--sage-deep); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+        .contact-item:active { transform: scale(0.97); }
         .contact-item svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--sage-deep); }
 
-        /* Ripple */
         .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(122, 158, 135, 0.2);
-            transform: scale(0);
-            animation: rippleEffect 0.6s ease-out;
-            pointer-events: none;
+            position: absolute; border-radius: 50%;
+            background: rgba(122,158,135,0.2); transform: scale(0);
+            animation: rippleEffect 0.6s ease-out; pointer-events: none;
         }
-        @keyframes rippleEffect {
-            to { transform: scale(4); opacity: 0; }
+        @keyframes rippleEffect { to { transform: scale(4); opacity: 0; } }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: var(--text); color: var(--cream); padding: 10px 24px;
+            border-radius: var(--radius-xl); font-size: 0.85rem; font-weight: 500;
+            z-index: 300; opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            pointer-events: none; white-space: nowrap;
         }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        /* ── Modals ── */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: var(--modal-overlay); z-index: 150;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
+        .modal {
+            background: var(--card-bg); border-radius: var(--radius-lg);
+            padding: 2rem; max-width: 900px; width: 90%; max-height: 85vh;
+            overflow-y: auto; box-shadow: var(--shadow-lg);
+            position: relative; transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .modal-overlay.open .modal { transform: scale(1); }
+        .modal-close {
+            position: absolute; top: 1rem; right: 1rem;
+            width: 36px; height: 36px; border-radius: 50%;
+            border: 1px solid var(--border); background: var(--card-bg);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 1.2rem; color: var(--text-soft);
+            transition: all var(--transition); z-index: 2;
+        }
+        .modal-close:hover { border-color: var(--rose-deep); color: var(--rose-deep); }
+        .modal iframe { width: 100%; height: 70vh; border: none; border-radius: var(--radius-sm); }
+
+        /* ── Contact Form ── */
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 10px 14px; border: 1px solid var(--border);
+            border-radius: var(--radius-sm); font-size: 0.9rem; font-family: inherit;
+            background: var(--cream); color: var(--text); transition: border-color var(--transition);
+        }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--sage-deep); }
+        .btn-submit {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--sage-deep); color: white; padding: 10px 24px;
+            border-radius: var(--radius-xl); font-size: 0.9rem; font-weight: 600;
+            border: none; cursor: pointer; transition: all var(--transition);
+        }
+        .btn-submit:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
         /* ── Footer ── */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border);
-            margin-top: 2rem;
-        }
-
-        /* ── PDF Download Banner ── */
-        .pdf-banner {
-            background: linear-gradient(135deg, var(--sage) 0%, var(--lavender) 25%, var(--sky) 50%, var(--rose) 75%, var(--sage) 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .pdf-banner-text h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 0.3rem;
-        }
-        .pdf-banner-text p {
-            font-size: 0.9rem;
-            color: var(--text-soft);
-        }
-        .btn-download-lg {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--text);
-            color: white;
-            padding: 12px 24px;
-            border-radius: var(--radius-xl);
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all var(--transition);
-            white-space: nowrap;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-download-lg:hover {
-            background: #444;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        .btn-download-lg:active {
-            transform: scale(0.96);
-        }
-        .btn-download-lg::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 0; height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        .btn-download-lg:active::after {
-            width: 300px; height: 300px;
-        }
-        .btn-download-lg svg { width: 20px; height: 20px; }
+        .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem; }
 
         /* ── Back to Top ── */
         .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--white);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 50;
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            transition: all var(--transition);
+            position: fixed; bottom: 2rem; right: 2rem;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--card-bg); border: 1px solid var(--border);
+            box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 50; opacity: 0; transform: translateY(20px);
+            pointer-events: none; transition: all var(--transition);
         }
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .back-to-top:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-3px);
-            border-color: var(--sage-deep);
-        }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .back-to-top:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: var(--sage-deep); }
         .back-to-top svg { width: 20px; height: 20px; color: var(--sage-deep); }
-
-        /* ── Section divider wave ── */
-        .section-divider {
-            height: 40px;
-            background: var(--cream);
-            position: relative;
-            overflow: hidden;
-        }
-        .section-divider::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -5%;
-            width: 110%;
-            height: 40px;
-            background: var(--white);
-            border-radius: 50%;
-        }
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 3rem 1.5rem 2rem;
-                gap: 1.5rem;
-            }
+            .hero { flex-direction: column; text-align: center; padding: 3rem 1.5rem 2rem; gap: 1.5rem; }
             .hero-img { width: 140px; height: 140px; }
             .hero-content h1 { font-size: 2rem; }
             .hero-content .bio { max-width: 100%; }
-            .hero-actions { justify-content: center; }
-            .stats-row { justify-content: center; }
+            .hero-actions, .stats-row { justify-content: center; }
             .nav-links { display: none; }
             .menu-toggle { display: block; }
             .mobile-menu { display: flex; }
             .section, .section-alt { padding: 2rem 1.25rem; }
             .card-grid { grid-template-columns: 1fr; }
             .cert-list { columns: 1; }
-            .pdf-banner { flex-direction: column; text-align: center; }
             .contact-grid { grid-template-columns: 1fr; }
             .back-to-top { bottom: 1rem; right: 1rem; }
+            .timeline { padding-left: 1.5rem; }
+            .timeline-item { padding-left: 1rem; }
+            .timeline-item::before { left: -1.15rem; }
+            .filter-tabs { justify-content: center; }
+            .cert-tabs { justify-content: center; }
         }
-
         @media (min-width: 769px) and (max-width: 1024px) {
             .hero { gap: 2rem; }
             .hero-content h1 { font-size: 2.25rem; }
             .card-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         html { scroll-behavior: smooth; }
-
         @media print {
-            .nav, .pdf-banner, .footer, .hero-actions, .back-to-top, .menu-toggle, .mobile-menu { display: none; }
-            body { background: white; }
+            .nav, .footer, .hero-actions, .back-to-top, .menu-toggle, .mobile-menu,
+            .progress-bar, .toast, .modal-overlay, .filter-tabs, .cert-tabs, .carousel-dots { display: none; }
+            body { background: white; color: black; }
             .section-alt { box-shadow: none; border: 1px solid #ddd; }
             .reveal { opacity: 1; transform: none; }
+            .card, .timeline-card { break-inside: avoid; }
         }
     </style>
 </head>
 <body>
+
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
+<div class="progress-bar" id="progressBar"></div>
 
 <!-- Navigation -->
 <nav class="nav" id="navbar">
     <div class="nav-inner">
         <span class="nav-brand">Jhonnathan Santana</span>
         <div class="nav-links" id="navLinks">
+            <a href="#acerca">Acerca de Mí</a>
             <a href="#experiencia">Experiencia</a>
+            <a href="#proyectos">Proyectos</a>
             <a href="#educacion">Educación</a>
             <a href="#certificaciones">Certificaciones</a>
             <a href="#habilidades">Habilidades</a>
             <a href="#contacto">Contacto</a>
+        </div>
+        <div class="nav-actions">
+            <button class="btn-icon" id="darkToggle" aria-label="Modo oscuro" title="Modo oscuro">
+                <svg id="darkIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            </button>
             <a href="cv-2026.pdf" download class="btn-download">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 CV PDF
             </a>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menú"><span></span><span></span><span></span></button>
         </div>
-        <button class="menu-toggle" id="menuToggle" aria-label="Menú">
-            <span></span><span></span><span></span>
-        </button>
     </div>
 </nav>
 
-<!-- Mobile Menu -->
 <div class="mobile-menu" id="mobileMenu">
+    <a href="#acerca">Acerca de Mí</a>
     <a href="#experiencia">Experiencia</a>
+    <a href="#proyectos">Proyectos</a>
     <a href="#educacion">Educación</a>
     <a href="#certificaciones">Certificaciones</a>
     <a href="#habilidades">Habilidades</a>
     <a href="#contacto">Contacto</a>
-    <a href="cv-2026.pdf" download class="btn-download" style="margin-top:1rem;">Descargar CV PDF</a>
+    <a href="cv-2026.pdf" download class="btn-download" style="margin-top:0.5rem;">Descargar CV PDF</a>
 </div>
+
+<main id="main-content">
 
 <!-- Hero -->
 <section class="hero">
@@ -700,135 +549,201 @@
             Profesional de TI con más de 15 años de experiencia en gestión de infraestructura, ciberseguridad, consultoría y docencia. Liderando la transformación digital en Fundación Sur Futuro y formando nuevas generaciones en ITLA e INFOTEP.
         </p>
         <div class="stats-row reveal reveal-delay-3">
-            <div class="stat-item">
-                <div class="stat-number"><span id="yearsCounter">0</span>+</div>
-                <div class="stat-label">Años de experiencia</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">8</div>
-                <div class="stat-label">Roles profesionales</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">17</div>
-                <div class="stat-label">Certificaciones</div>
-            </div>
+            <div class="stat-item"><div class="stat-number"><span id="yearsCounter">0</span>+</div><div class="stat-label">Años de experiencia</div></div>
+            <div class="stat-item"><div class="stat-number">8</div><div class="stat-label">Roles profesionales</div></div>
+            <div class="stat-item"><div class="stat-number">17</div><div class="stat-label">Certificaciones</div></div>
+            <div class="stat-item"><div class="stat-number">2</div><div class="stat-label">Maestrías en curso</div></div>
         </div>
         <div class="hero-actions reveal reveal-delay-4">
-            <a href="cv-2026.pdf" download class="btn-download-lg">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Descargar CV en PDF
+            <a href="cv-2026.pdf" download class="btn-download" style="padding:12px 24px;font-size:0.95rem;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Descargar CV PDF
             </a>
+            <button class="btn-outline" id="previewPdfBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Vista previa
+            </button>
+            <button class="btn-outline" id="downloadJsonBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                JSON Resume
+            </button>
             <a href="#contacto" class="btn-outline">Contactar</a>
         </div>
     </div>
 </section>
 
-<!-- PDF Banner -->
-<div class="section">
-    <div class="pdf-banner reveal">
-        <div class="pdf-banner-text">
-            <h3>Curriculum Vitae 2026</h3>
-            <p>Versión completa en formato PDF · ATS-Compliant · Listo para imprimir</p>
-        </div>
-        <a href="cv-2026.pdf" download class="btn-download-lg">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Descargar PDF
-        </a>
+<!-- Acerca de Mí -->
+<section id="acerca" class="section-alt">
+    <h2 class="section-title reveal">Acerca de Mí</h2>
+    <p class="section-subtitle reveal reveal-delay-1">La persona detrás del perfil profesional</p>
+    <div class="reveal reveal-delay-1" style="max-width:800px;margin:0 auto;text-align:center;">
+        <p style="font-size:1.05rem;color:var(--text-soft);line-height:1.8;margin-bottom:1.5rem;">
+            Con más de 15 años de trayectoria en el sector tecnológico, he construido una carrera que integra la gestión estratégica de TI, la ciberseguridad, la consultoría y la docencia. Mi enfoque combina una sólida base técnica con una visión de liderazgo orientada a resultados.
+        </p>
+        <p style="font-size:1.05rem;color:var(--text-soft);line-height:1.8;">
+            Actualmente lidero la transformación digital en Fundación Sur Futuro como Gerente de Tecnología, mientras formo a las nuevas generaciones de profesionales en ITLA e INFOTEP. Creo firmemente que el conocimiento tecnológico es más poderoso cuando se comparte, y esa convicción guía tanto mi práctica docente como mi gestión de equipos y proyectos.
+        </p>
     </div>
-</div>
+</section>
 
 <!-- Experiencia -->
-<section id="experiencia" class="section-alt">
+<section id="experiencia" class="section">
     <h2 class="section-title reveal">Experiencia Profesional</h2>
     <p class="section-subtitle reveal reveal-delay-1">15+ años en gestión de TI, consultoría y docencia</p>
 
-    <h3 class="reveal reveal-delay-1" style="font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:1rem;">Profesional</h3>
-    <div class="card-grid">
-        <div class="card reveal reveal-delay-1">
-            <div class="card-title">Gerente de Tecnología de la Información</div>
-            <div class="card-org">Fundación Sur Futuro — Santo Domingo, RD</div>
-            <div class="card-date">Julio 2025 – Presente</div>
-            <ul class="card-bullets">
-                <li>Dirección estratégica del área de TI, alineando tecnología con objetivos institucionales.</li>
-                <li>Supervisión de infraestructura, seguridad de redes y continuidad del negocio.</li>
-                <li>Gestión de proveedores tecnológicos y presupuesto del departamento.</li>
-                <li>Implementación de políticas de ciberseguridad y gobierno de TI.</li>
-            </ul>
-        </div>
-        <div class="card reveal reveal-delay-1">
-            <div class="card-title">Consultor de Soluciones de TI</div>
-            <div class="card-org">Fundación Sur Futuro — Santo Domingo, RD</div>
-            <div class="card-date">Agosto 2024 – Septiembre 2025</div>
-            <ul class="card-bullets">
-                <li>Diagnóstico y optimización de infraestructura tecnológica institucional.</li>
-                <li>Definición de hoja de ruta para la modernización de sistemas.</li>
-                <li>Reducción de gastos de licenciamiento en un 60%.</li>
-                <li>Implementación de soluciones de seguridad como Microsoft ADR.</li>
-            </ul>
-        </div>
-        <div class="card reveal reveal-delay-2">
-            <div class="card-title">Analista Senior de Monitoreo de TI (MSTI)</div>
-            <div class="card-org">APAP — Asociación Popular de Ahorros y Préstamos, Santo Domingo, RD</div>
-            <div class="card-date">Julio 2022 – Marzo 2025</div>
-            <ul class="card-bullets">
-                <li>Supervisión de plataformas: APPManager, OPManager, Splunk y Azure Monitor.</li>
-                <li>Análisis de disponibilidad y rendimiento para resolución proactiva de incidentes.</li>
-                <li>Generación de informes ejecutivos con métricas de SLA.</li>
-                <li>Implementación de alertas y dashboards para sistemas críticos financieros.</li>
-            </ul>
-        </div>
-        <div class="card reveal reveal-delay-2">
-            <div class="card-title">Experto TI B2B — SysAdmin, Redes & Seguridad</div>
-            <div class="card-org">Nerdot — República Dominicana</div>
-            <div class="card-date">Julio 2017 – Julio 2022</div>
-            <ul class="card-bullets">
-                <li>Soporte técnico recurrente B2B: SysAdmin, respaldos, central IP y seguridad de redes.</li>
-                <li>Gestión de proyectos de implementación y mejora de infraestructura.</li>
-                <li>Migración de centrales análogas a IP y de usuarios a Microsoft 365.</li>
-                <li>Documentación de incidencias y base de conocimientos técnica.</li>
-            </ul>
-        </div>
-        <div class="card reveal reveal-delay-3">
-            <div class="card-title">Consultor de TI</div>
-            <div class="card-org">NetAc Consulting — República Dominicana</div>
-            <div class="card-date">Octubre 2013 – Enero 2023</div>
-            <ul class="card-bullets">
-                <li>Asesoramiento a empresas en implementación y optimización de infraestructura TI.</li>
-                <li>Diseño y ejecución de proyectos de modernización tecnológica.</li>
-                <li>Capacitación de personal en tecnologías implementadas.</li>
-            </ul>
-        </div>
-        <div class="card reveal reveal-delay-3">
-            <div class="card-title">Encargado de Tecnología</div>
-            <div class="card-org">Centro de Capacitación Juan Bosch — Santo Domingo, RD</div>
-            <div class="card-date">Junio 2009 – 2016</div>
-            <ul class="card-bullets">
-                <li>Gestión integral de la infraestructura tecnológica del centro.</li>
-                <li>Soporte técnico a formadores y personal administrativo.</li>
-            </ul>
-        </div>
+    <div class="filter-tabs reveal reveal-delay-1">
+        <button class="filter-tab active" data-filter="all">Todos</button>
+        <button class="filter-tab" data-filter="profesional">Profesional</button>
+        <button class="filter-tab" data-filter="docente">Docente</button>
     </div>
 
-    <h3 class="reveal" style="font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin:2rem 0 1rem;">Docente</h3>
+    <div class="timeline reveal reveal-delay-1" id="timeline">
+        <div class="timeline-item current" data-cat="profesional">
+            <div class="timeline-card card current">
+                <div class="card-title">Gerente de Tecnología de la Información <span class="badge badge-current">Actual</span></div>
+                <div class="card-org">Fundación Sur Futuro — Santo Domingo, RD</div>
+                <div class="card-date">Julio 2025 – Presente</div>
+                <ul class="card-bullets">
+                    <li>Dirección estratégica del área de TI, alineando tecnología con objetivos institucionales.</li>
+                    <li>Supervisión de infraestructura, seguridad de redes y continuidad del negocio.</li>
+                    <li>Gestión de proveedores tecnológicos y presupuesto del departamento.</li>
+                    <li>Implementación de políticas de ciberseguridad y gobierno de TI.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" data-cat="profesional">
+            <div class="timeline-card">
+                <div class="card-title">Consultor de Soluciones de TI</div>
+                <div class="card-org">Fundación Sur Futuro — Santo Domingo, RD</div>
+                <div class="card-date">Agosto 2024 – Septiembre 2025</div>
+                <ul class="card-bullets">
+                    <li>Diagnóstico y optimización de infraestructura tecnológica institucional.</li>
+                    <li>Definición de hoja de ruta para la modernización de sistemas.</li>
+                    <li>Reducción de gastos de licenciamiento en un 60%.</li>
+                    <li>Implementación de soluciones de seguridad como Microsoft ADR.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" data-cat="profesional">
+            <div class="timeline-card">
+                <div class="card-title">Analista Senior de Monitoreo de TI (MSTI)</div>
+                <div class="card-org">APAP — Asociación Popular de Ahorros y Préstamos, Santo Domingo, RD</div>
+                <div class="card-date">Julio 2022 – Marzo 2025</div>
+                <ul class="card-bullets">
+                    <li>Supervisión de plataformas: APPManager, OPManager, Splunk y Azure Monitor.</li>
+                    <li>Análisis de disponibilidad y rendimiento para resolución proactiva de incidentes.</li>
+                    <li>Generación de informes ejecutivos con métricas de SLA.</li>
+                    <li>Implementación de alertas y dashboards para sistemas críticos financieros.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" data-cat="docente">
+            <div class="timeline-card card current">
+                <div class="card-title">Docente — Tecnología de la Información <span class="badge badge-current">Actual</span></div>
+                <div class="card-org">ITLA — Instituto Tecnológico de Las Américas, Santo Domingo, RD</div>
+                <div class="card-date">Noviembre 2023 – Presente</div>
+                <ul class="card-bullets">
+                    <li>Cursos avanzados: programación, redes, infraestructura y ciberseguridad.</li>
+                    <li>Diseño de material didáctico adaptado al mercado laboral TI.</li>
+                    <li>Mentoría en proyectos académicos y profesionales.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" data-cat="profesional">
+            <div class="timeline-card">
+                <div class="card-title">Experto TI B2B — SysAdmin, Redes & Seguridad</div>
+                <div class="card-org">Nerdot — República Dominicana</div>
+                <div class="card-date">Julio 2017 – Julio 2022</div>
+                <ul class="card-bullets">
+                    <li>Soporte técnico recurrente B2B: SysAdmin, respaldos, central IP y seguridad de redes.</li>
+                    <li>Gestión de proyectos de implementación y mejora de infraestructura.</li>
+                    <li>Migración de centrales análogas a IP y de usuarios a Microsoft 365.</li>
+                    <li>Documentación de incidencias y base de conocimientos técnica.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" data-cat="docente">
+            <div class="timeline-card card current">
+                <div class="card-title">Facilitador de Formación Técnico Profesional <span class="badge badge-current">Actual</span></div>
+                <div class="card-org">INFOTEP — Instituto Nacional de Formación Técnico Profesional, Santo Domingo, RD</div>
+                <div class="card-date">Enero 2012 – Presente</div>
+                <ul class="card-bullets">
+                    <li>Impartición de programas de formación técnica en TI a nivel nacional.</li>
+                    <li>Evaluación del rendimiento de participantes y retroalimentación constructiva.</li>
+                    <li>Actualización continua del contenido para reflejar las últimas tendencias.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" data-cat="profesional">
+            <div class="timeline-card">
+                <div class="card-title">Consultor de TI</div>
+                <div class="card-org">NetAc Consulting — República Dominicana</div>
+                <div class="card-date">Octubre 2013 – Enero 2023</div>
+                <ul class="card-bullets">
+                    <li>Asesoramiento a empresas en implementación y optimización de infraestructura TI.</li>
+                    <li>Diseño y ejecución de proyectos de modernización tecnológica.</li>
+                    <li>Capacitación de personal en tecnologías implementadas.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline-item" data-cat="profesional">
+            <div class="timeline-card">
+                <div class="card-title">Encargado de Tecnología</div>
+                <div class="card-org">Centro de Capacitación Juan Bosch — Santo Domingo, RD</div>
+                <div class="card-date">Junio 2009 – 2016</div>
+                <ul class="card-bullets">
+                    <li>Gestión integral de la infraestructura tecnológica del centro.</li>
+                    <li>Soporte técnico a formadores y personal administrativo.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Proyectos -->
+<section id="proyectos" class="section-alt">
+    <h2 class="section-title reveal">Proyectos Destacados</h2>
+    <p class="section-subtitle reveal reveal-delay-1">Casos reales de impacto medible</p>
     <div class="card-grid">
-        <div class="card reveal">
-            <div class="card-title">Docente — Tecnología de la Información</div>
-            <div class="card-org">ITLA — Instituto Tecnológico de Las Américas, Santo Domingo, RD</div>
-            <div class="card-date">Noviembre 2023 – Presente</div>
+        <div class="card reveal reveal-delay-1">
+            <div class="card-title">Dashboard de Monitoreo Financiero</div>
+            <div class="card-org">APAP · Splunk + Azure Monitor + PowerShell</div>
+            <div class="card-date">2023</div>
             <ul class="card-bullets">
-                <li>Cursos avanzados: programación, redes, infraestructura y ciberseguridad.</li>
-                <li>Diseño de material didáctico adaptado al mercado laboral TI.</li>
-                <li>Mentoría en proyectos académicos y profesionales.</li>
+                <li>Desarrollo de 10+ dashboards ejecutivos para visualización de datos críticos.</li>
+                <li>Creación de 200+ alertas proactivas para servicios financieros.</li>
+                <li>Reducción del tiempo de escalamiento de incidentes en un 80%.</li>
+                <li>Optimización de monitoreo para 200+ dispositivos de infraestructura.</li>
             </ul>
         </div>
-        <div class="card reveal">
-            <div class="card-title">Facilitador de Formación Técnico Profesional</div>
-            <div class="card-org">INFOTEP — Instituto Nacional de Formación Técnico Profesional, Santo Domingo, RD</div>
-            <div class="card-date">Enero 2012 – Presente</div>
+        <div class="card reveal reveal-delay-1">
+            <div class="card-title">Migración a Microsoft 365</div>
+            <div class="card-org">Nerdot · Microsoft 365 + Azure AD + Exchange Online</div>
+            <div class="card-date">2020</div>
             <ul class="card-bullets">
-                <li>Impartición de programas de formación técnica en TI a nivel nacional.</li>
-                <li>Evaluación del rendimiento de participantes y retroalimentación constructiva.</li>
-                <li>Actualización continua del contenido para reflejar las últimas tendencias.</li>
+                <li>Migración completa de usuarios y buzones a Microsoft 365 sin pérdida de datos.</li>
+                <li>Configuración de políticas de seguridad y compliance en Azure AD.</li>
+                <li>Migración de centrales análogas a VoIP con mejora significativa en comunicación.</li>
+            </ul>
+        </div>
+        <div class="card reveal reveal-delay-2">
+            <div class="card-title">Optimización de Licenciamiento</div>
+            <div class="card-org">Fundación Sur Futuro · Microsoft ADR + ITIL + COBIT</div>
+            <div class="card-date">2025</div>
+            <ul class="card-bullets">
+                <li>Reducción del 60% en gastos de licenciamiento mediante auditoría y renegociación.</li>
+                <li>Implementación de Microsoft ADR para detección y respuesta avanzada.</li>
+                <li>Creación de políticas y procesos basados en ITIL y COBIT.</li>
+            </ul>
+        </div>
+        <div class="card reveal reveal-delay-2">
+            <div class="card-title">Diplomado en Seguridad de la Información</div>
+            <div class="card-org">ITLA · Ciberseguridad + Fortinet + Azure Security</div>
+            <div class="card-date">2024</div>
+            <ul class="card-bullets">
+                <li>Diseño e impartición de diplomado especializado en seguridad informática.</li>
+                <li>Formación de profesionales en fundamentos de ciberseguridad y redes seguras.</li>
+                <li>Material didáctico adaptado a certificaciones Fortinet NSE y Microsoft SC-900.</li>
             </ul>
         </div>
     </div>
@@ -837,17 +752,17 @@
 <!-- Educación -->
 <section id="educacion" class="section">
     <h2 class="section-title reveal">Educación</h2>
-    <p class="section-subtitle reveal reveal-delay-1">Formación académica y capacitaciones impartidas</p>
+    <p class="section-subtitle reveal reveal-delay-1">Formación académica</p>
     <div class="card-grid">
         <div class="card reveal reveal-delay-1">
-            <div class="card-title">Maestría en Auditoría y Seguridad Informática</div>
+            <div class="card-title">Maestría en Auditoría y Seguridad Informática <span class="badge badge-ongoing">En curso</span></div>
             <div class="card-org">UASD — Universidad Autónoma de Santo Domingo</div>
-            <div class="card-date">Abril 2026 – Abril 2028 (En curso)</div>
+            <div class="card-date">Abril 2026 – Abril 2028</div>
         </div>
         <div class="card reveal reveal-delay-1">
-            <div class="card-title">Maestría en Dirección y Gestión de TI</div>
+            <div class="card-title">Maestría en Dirección y Gestión de TI <span class="badge badge-ongoing">En curso</span></div>
             <div class="card-org">UNIR — Universidad Internacional de La Rioja (México)</div>
-            <div class="card-date">Octubre 2024 – Junio 2026 (En curso)</div>
+            <div class="card-date">Octubre 2024 – Junio 2026</div>
         </div>
         <div class="card reveal reveal-delay-2">
             <div class="card-title">Licenciatura en Informática</div>
@@ -866,131 +781,195 @@
     <h2 class="section-title reveal">Certificaciones</h2>
     <p class="section-subtitle reveal reveal-delay-1">Profesionales, docentes y formación complementaria</p>
 
-    <h3 class="reveal reveal-delay-1" style="font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:1rem;">Profesionales</h3>
-    <ul class="cert-list reveal reveal-delay-1">
-        <li><strong>Azure Fundamentals (AZ-900)</strong> — Microsoft, 2023</li>
-        <li><strong>Azure Data Fundamentals (DP-900)</strong> — Microsoft, 2023</li>
-        <li><strong>Security, Compliance & Identity (SC-900)</strong> — Microsoft, 2023</li>
-        <li><strong>Power Platform Fundamentals (PL-900)</strong> — Microsoft, 2023</li>
-        <li><strong>Microsoft Certified Educator (MCE)</strong> — Microsoft, 2018</li>
-        <li><strong>MOS: Word / PowerPoint / Excel 2016</strong> — Microsoft, 2018</li>
-        <li><strong>MTA: Networking Fundamentals</strong> — Microsoft, 2018</li>
-        <li><strong>MTA: Windows Server Administration</strong> — Microsoft, 2018</li>
-        <li><strong>MTA: Security Fundamentals</strong> — Microsoft, 2018</li>
-        <li><strong>Fortinet NSE1, NSE2, NSE3</strong> — Fortinet</li>
-        <li><strong>Design Thinking y Scrum</strong> — UNIR, 2025</li>
-        <li><strong>Gestión de Proyectos con Agile</strong> — Coursera / Google, 2023</li>
-        <li><strong>Fundamentos de Análisis de Datos</strong> — Microsoft & LinkedIn, 2023</li>
-        <li><strong>CCNA R&S 200-125</strong> — Capacity Academy, 2018</li>
-        <li><strong>CompTIA+</strong> — Capacity Academy, 2017</li>
-        <li><strong>Programación en JAVA</strong> — EOI, 2019</li>
-        <li><strong>DevOps: Docker, Kubernetes, Jenkins, CI/CD</strong> — En curso</li>
-    </ul>
+    <div class="cert-tabs reveal reveal-delay-1">
+        <button class="cert-tab active" data-cert="profesionales">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            Profesionales
+        </button>
+        <button class="cert-tab" data-cert="infotep">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+            INFOTEP
+        </button>
+        <button class="cert-tab" data-cert="docentes">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+            Docentes
+        </button>
+    </div>
 
-    <h3 class="reveal" style="font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin:2rem 0 1rem;">Formación Complementaria — INFOTEP</h3>
-    <ul class="cert-list reveal">
-        <li>Técnico Superior en Informática (Desarrollo de Software)</li>
-        <li>Diplomado Mandos Medios</li>
-        <li>Diseño de Páginas Web</li>
-        <li>Auxiliar de Contabilidad</li>
-        <li>Tutor para Formación en Ambientes Virtuales, 2015</li>
-        <li>Técnicas de Gerencia Moderna, 2012</li>
-        <li>Estrategia de Aprendizaje Basado en Proyectos, 2022</li>
-        <li>Workshop Tecnologías Emergentes 4.0, 2023</li>
-    </ul>
-
-    <h3 class="reveal" style="font-size:0.85rem;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin:2rem 0 1rem;">Docentes</h3>
-    <ul class="cert-list reveal">
-        <li><strong>Certificación Facilitador de la Formación Profesional</strong> — INFOTEP, Mayo 2025</li>
-        <li>Diplomado Competencias Didácticas — Universidad Santander, 2024</li>
-        <li>Docente De La Excelencia — ITLA, 2024</li>
-        <li>Diplomado Evaluación De Los Aprendizajes — ITLA, 2024</li>
-        <li>Formación Humana Y Construcción De Ciudadanía — INFOTEP, 15h (Marzo 2024)</li>
-        <li>Certificación Aprendizaje Combinado y Generatividad Docente 4.0 — LINC, 2022</li>
-        <li>Estrategia De Aprendizaje Basado En Proyectos — INFOTEP, 24h (Julio 2022)</li>
-        <li>Actualización Metodológica — INFOTEP, 2016</li>
-        <li>Tutor Para Ambientes Virtuales — INFOTEP, 60h (Noviembre 2015)</li>
-        <li>Diseño Curricular — INFOTEP, 2014</li>
-        <li>Facilitador de la Formación Técnico Profesional — INFOTEP, 2013</li>
-    </ul>
+    <div class="cert-panel active reveal reveal-delay-1" data-cert="profesionales">
+        <ul class="cert-list">
+            <li><strong>Azure Fundamentals (AZ-900)</strong> — Microsoft, 2023</li>
+            <li><strong>Azure Data Fundamentals (DP-900)</strong> — Microsoft, 2023</li>
+            <li><strong>Security, Compliance & Identity (SC-900)</strong> — Microsoft, 2023</li>
+            <li><strong>Power Platform Fundamentals (PL-900)</strong> — Microsoft, 2023</li>
+            <li><strong>Microsoft Certified Educator (MCE)</strong> — Microsoft, 2018</li>
+            <li><strong>MOS: Word / PowerPoint / Excel 2016</strong> — Microsoft, 2018</li>
+            <li><strong>MTA: Networking Fundamentals</strong> — Microsoft, 2018</li>
+            <li><strong>MTA: Windows Server Administration</strong> — Microsoft, 2018</li>
+            <li><strong>MTA: Security Fundamentals</strong> — Microsoft, 2018</li>
+            <li><strong>Fortinet NSE1, NSE2, NSE3</strong> — Fortinet</li>
+            <li><strong>Design Thinking y Scrum</strong> — UNIR, 2025</li>
+            <li><strong>Gestión de Proyectos con Agile</strong> — Coursera / Google, 2023</li>
+            <li><strong>Fundamentos de Análisis de Datos</strong> — Microsoft & LinkedIn, 2023</li>
+            <li><strong>CCNA R&S 200-125</strong> — Capacity Academy, 2018</li>
+            <li><strong>CompTIA+</strong> — Capacity Academy, 2017</li>
+            <li><strong>Programación en JAVA</strong> — EOI, 2019</li>
+            <li><strong>DevOps: Docker, Kubernetes, Jenkins, CI/CD</strong> — En curso</li>
+        </ul>
+    </div>
+    <div class="cert-panel reveal reveal-delay-1" data-cert="infotep">
+        <ul class="cert-list">
+            <li>Técnico Superior en Informática (Desarrollo de Software)</li>
+            <li>Diplomado Mandos Medios</li>
+            <li>Diseño de Páginas Web</li>
+            <li>Auxiliar de Contabilidad</li>
+            <li>Tutor para Formación en Ambientes Virtuales, 2015</li>
+            <li>Técnicas de Gerencia Moderna, 2012</li>
+            <li>Estrategia de Aprendizaje Basado en Proyectos, 2022</li>
+            <li>Workshop Tecnologías Emergentes 4.0, 2023</li>
+        </ul>
+    </div>
+    <div class="cert-panel reveal reveal-delay-1" data-cert="docentes">
+        <ul class="cert-list">
+            <li><strong>Certificación Facilitador de la Formación Profesional</strong> — INFOTEP, Mayo 2025</li>
+            <li>Diplomado Competencias Didácticas — Universidad Santander, 2024</li>
+            <li>Docente De La Excelencia — ITLA, 2024</li>
+            <li>Diplomado Evaluación De Los Aprendizajes — ITLA, 2024</li>
+            <li>Formación Humana Y Construcción De Ciudadanía — INFOTEP, 15h (Marzo 2024)</li>
+            <li>Certificación Aprendizaje Combinado y Generatividad Docente 4.0 — LINC, 2022</li>
+            <li>Estrategia De Aprendizaje Basado En Proyectos — INFOTEP, 24h (Julio 2022)</li>
+            <li>Actualización Metodológica — INFOTEP, 2016</li>
+            <li>Tutor Para Ambientes Virtuales — INFOTEP, 60h (Noviembre 2015)</li>
+            <li>Diseño Curricular — INFOTEP, 2014</li>
+            <li>Facilitador de la Formación Técnico Profesional — INFOTEP, 2013</li>
+        </ul>
+    </div>
 </section>
 
 <!-- Habilidades -->
 <section id="habilidades" class="section">
     <h2 class="section-title reveal">Habilidades</h2>
-    <p class="section-subtitle reveal reveal-delay-1">Competencias técnicas organizadas por área — haz clic en una categoría para filtrar</p>
+    <p class="section-subtitle reveal reveal-delay-1">Competencias técnicas — haz clic en una categoría para filtrar</p>
 
     <div class="tag-group reveal reveal-delay-1" data-group="monitoreo">
         <div class="tag-group-title">Monitoreo & Observabilidad</div>
         <div class="tag-cloud">
-            <span class="tag tag-sage">Splunk</span>
-            <span class="tag tag-sage">Azure Monitor</span>
-            <span class="tag tag-sage">OPManager</span>
-            <span class="tag tag-sage">APPManager</span>
+            <span class="tag tag-sage" data-tooltip="Análisis de datos de máquina en tiempo real">Splunk</span>
+            <span class="tag tag-sage" data-tooltip="Monitoreo integral de recursos en Azure">Azure Monitor</span>
+            <span class="tag tag-sage" data-tooltip="Gestión de operaciones de red y servidores">OPManager</span>
+            <span class="tag tag-sage" data-tooltip="Monitoreo de rendimiento de aplicaciones">APPManager</span>
         </div>
     </div>
     <div class="tag-group reveal reveal-delay-1" data-group="cloud">
         <div class="tag-group-title">Cloud & Azure</div>
         <div class="tag-cloud">
-            <span class="tag tag-sky">AZ-900</span>
-            <span class="tag tag-sky">DP-900</span>
-            <span class="tag tag-sky">SC-900</span>
-            <span class="tag tag-sky">PL-900</span>
-            <span class="tag tag-sky">Azure AD</span>
-            <span class="tag tag-sky">Microsoft 365</span>
+            <span class="tag tag-sky" data-tooltip="Microsoft Certified: Azure Fundamentals">AZ-900</span>
+            <span class="tag tag-sky" data-tooltip="Microsoft Certified: Azure Data Fundamentals">DP-900</span>
+            <span class="tag tag-sky" data-tooltip="Microsoft Certified: Security, Compliance & Identity">SC-900</span>
+            <span class="tag tag-sky" data-tooltip="Microsoft Certified: Power Platform Fundamentals">PL-900</span>
+            <span class="tag tag-sky" data-tooltip="Gestión de identidades y acceso en la nube">Azure AD</span>
+            <span class="tag tag-sky" data-tooltip="Suite de productividad y colaboración empresarial">Microsoft 365</span>
         </div>
     </div>
     <div class="tag-group reveal reveal-delay-2" data-group="devops">
         <div class="tag-group-title">DevOps</div>
         <div class="tag-cloud">
-            <span class="tag tag-lavender">Docker</span>
-            <span class="tag tag-lavender">Kubernetes</span>
-            <span class="tag tag-lavender">Jenkins</span>
-            <span class="tag tag-lavender">Git</span>
-            <span class="tag tag-lavender">CI/CD</span>
+            <span class="tag tag-lavender" data-tooltip="Contenedores y entornos aislados">Docker</span>
+            <span class="tag tag-lavender" data-tooltip="Orquestación de contenedores a escala">Kubernetes</span>
+            <span class="tag tag-lavender" data-tooltip="Automatización de CI/CD">Jenkins</span>
+            <span class="tag tag-lavender" data-tooltip="Control de versiones distribuido">Git</span>
+            <span class="tag tag-lavender" data-tooltip="Integración y despliegue continuo">CI/CD</span>
         </div>
     </div>
     <div class="tag-group reveal reveal-delay-2" data-group="redes">
         <div class="tag-group-title">Redes & Seguridad</div>
         <div class="tag-cloud">
-            <span class="tag tag-rose">Fortinet NSE</span>
-            <span class="tag tag-rose">CCNA</span>
-            <span class="tag tag-rose">Ciberseguridad</span>
-            <span class="tag tag-rose">Microsoft ADR</span>
+            <span class="tag tag-rose" data-tooltip="Certificación Fortinet Network Security Expert">Fortinet NSE</span>
+            <span class="tag tag-rose" data-tooltip="Cisco Certified Network Associate">CCNA</span>
+            <span class="tag tag-rose" data-tooltip="Protección de sistemas y datos">Ciberseguridad</span>
+            <span class="tag tag-rose" data-tooltip="Detección y respuesta avanzada de amenazas">Microsoft ADR</span>
         </div>
     </div>
     <div class="tag-group reveal reveal-delay-3" data-group="sysadmin">
         <div class="tag-group-title">SysAdmin & Lenguajes</div>
         <div class="tag-cloud">
-            <span class="tag tag-cream">Windows Server</span>
-            <span class="tag tag-cream">Linux</span>
-            <span class="tag tag-cream">Active Directory</span>
-            <span class="tag tag-cream">SQL</span>
-            <span class="tag tag-cream">Python</span>
-            <span class="tag tag-cream">KQL</span>
-            <span class="tag tag-cream">SPL</span>
-            <span class="tag tag-cream">Shell Bash</span>
+            <span class="tag tag-cream" data-tooltip="Administración de servidores Windows">Windows Server</span>
+            <span class="tag tag-cream" data-tooltip="Administración de sistemas Linux">Linux</span>
+            <span class="tag tag-cream" data-tooltip="Servicio de directorio de Microsoft">Active Directory</span>
+            <span class="tag tag-cream" data-tooltip="Lenguaje de consulta estructurada">SQL</span>
+            <span class="tag tag-cream" data-tooltip="Lenguaje de programación multipropósito">Python</span>
+            <span class="tag tag-cream" data-tooltip="Kusto Query Language para Azure">KQL</span>
+            <span class="tag tag-cream" data-tooltip="Search Processing Language de Splunk">SPL</span>
+            <span class="tag tag-cream" data-tooltip="Scripting en terminal Unix/Linux">Shell Bash</span>
         </div>
     </div>
     <div class="tag-group reveal reveal-delay-3" data-group="metodologias">
         <div class="tag-group-title">Metodologías</div>
         <div class="tag-cloud">
-            <span class="tag tag-sage">Agile</span>
-            <span class="tag tag-sage">Scrum</span>
-            <span class="tag tag-sage">Design Thinking</span>
-            <span class="tag tag-sage">ITIL</span>
-            <span class="tag tag-sage">COBIT</span>
+            <span class="tag tag-sage" data-tooltip="Desarrollo iterativo e incremental">Agile</span>
+            <span class="tag tag-sage" data-tooltip="Framework ágil para equipos">Scrum</span>
+            <span class="tag tag-sage" data-tooltip="Innovación centrada en el usuario">Design Thinking</span>
+            <span class="tag tag-sage" data-tooltip="Biblioteca de infraestructura de TI">ITIL</span>
+            <span class="tag tag-sage" data-tooltip="Objetivos de control para TI">COBIT</span>
         </div>
     </div>
     <div class="tag-group reveal reveal-delay-4" data-group="docencia">
         <div class="tag-group-title">Docencia</div>
         <div class="tag-cloud">
-            <span class="tag tag-lavender">INFOTEP</span>
-            <span class="tag tag-lavender">ITLA</span>
-            <span class="tag tag-lavender">E-learning</span>
-            <span class="tag tag-lavender">Diseño curricular</span>
-            <span class="tag tag-lavender">Mentoría</span>
-            <span class="tag tag-lavender">Comunicación técnica</span>
+            <span class="tag tag-lavender" data-tooltip="Instituto Nacional de Formación Técnico Profesional">INFOTEP</span>
+            <span class="tag tag-lavender" data-tooltip="Instituto Tecnológico de Las Américas">ITLA</span>
+            <span class="tag tag-lavender" data-tooltip="Formación virtual y plataformas LMS">E-learning</span>
+            <span class="tag tag-lavender" data-tooltip="Creación de programas educativos">Diseño curricular</span>
+            <span class="tag tag-lavender" data-tooltip="Acompañamiento personalizado">Mentoría</span>
+            <span class="tag tag-lavender" data-tooltip="Explicación clara de conceptos complejos">Comunicación técnica</span>
+        </div>
+    </div>
+
+    <div class="radar-container reveal reveal-delay-4">
+        <canvas id="radarChart"></canvas>
+    </div>
+</section>
+
+<!-- Idiomas -->
+<section id="idiomas" class="section-alt">
+    <h2 class="section-title reveal">Idiomas</h2>
+    <p class="section-subtitle reveal reveal-delay-1">Niveles de competencia lingüística</p>
+    <div class="card-grid reveal reveal-delay-1">
+        <div class="card">
+            <div class="card-title">Español</div>
+            <div class="card-org">Nativo</div>
+            <div class="lang-dots" style="margin-top:0.5rem;">
+                <span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-title">Inglés</div>
+            <div class="card-org">Intermedio</div>
+            <div class="lang-dots" style="margin-top:0.5rem;">
+                <span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot filled"></span><span class="lang-dot"></span><span class="lang-dot"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Referencias -->
+<section id="referencias" class="section">
+    <h2 class="section-title reveal">Referencias</h2>
+    <p class="section-subtitle reveal reveal-delay-1">Profesionales que avalan mi trayectoria</p>
+    <div class="carousel reveal reveal-delay-1" id="refCarousel">
+        <div class="carousel-track" id="refTrack">
+            <div class="carousel-card">
+                <blockquote>"Profesional comprometido con la excelencia académica y técnica. Su capacidad para transmitir conocimientos complejos de forma clara lo distingue como docente."</blockquote>
+                <cite>Docente Frank Sánchez — (809) 837-0174</cite>
+            </div>
+            <div class="carousel-card">
+                <blockquote>"Destaca por su enfoque metódico y su habilidad para resolver problemas de infraestructura con soluciones prácticas y eficientes."</blockquote>
+                <cite>Lic. Marcos Ascevedo — (829) 921-9523</cite>
+            </div>
+        </div>
+        <div class="carousel-dots">
+            <button class="carousel-dot active" data-index="0"></button>
+            <button class="carousel-dot" data-index="1"></button>
         </div>
     </div>
 </section>
@@ -998,16 +977,16 @@
 <!-- Contacto -->
 <section id="contacto" class="section-alt">
     <h2 class="section-title reveal">Contacto</h2>
-    <p class="section-subtitle reveal reveal-delay-1">Información de contacto directa</p>
+    <p class="section-subtitle reveal reveal-delay-1">Información de contacto directa — clic para copiar</p>
     <div class="contact-grid reveal reveal-delay-1">
-        <a href="tel:+1829****659" class="contact-item">
+        <div class="contact-item" data-copy="+18298464659">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             (829) 846-4659
-        </a>
-        <a href="mailto:Jhonnathansantana@outlook.com" class="contact-item">
+        </div>
+        <div class="contact-item" data-copy="Jhonnathansantana@outlook.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             Jhonnathansantana@outlook.com
-        </a>
+        </div>
         <a href="https://www.linkedin.com/in/jhonnathansantana/" target="_blank" rel="noopener" class="contact-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             LinkedIn
@@ -1016,61 +995,132 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
             jhonnathan.com.do
         </a>
-        <div class="contact-item">
+        <div class="contact-item" data-copy="Santo Domingo Este, República Dominicana">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             Santo Domingo Este, RD
         </div>
     </div>
+    <div style="text-align:center;margin-top:2rem;" class="reveal reveal-delay-2">
+        <button class="btn-outline" id="openContactFormBtn" style="padding:10px 24px;font-size:0.9rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Enviar mensaje directo
+        </button>
+    </div>
 </section>
 
-<!-- Footer -->
+</main>
+
 <footer class="footer">
     &copy; 2026 Jhonnathan De Jesús Araujo Santana. Todos los derechos reservados.
 </footer>
 
-<!-- Back to Top -->
 <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 
-<script>
-// ── Scroll Reveal (Intersection Observer) ──
-const revealElements = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-revealElements.forEach(el => observer.observe(el));
+<div class="toast" id="toast"></div>
 
-// ── Animated Years Counter ──
+<!-- PDF Preview Modal -->
+<div class="modal-overlay" id="pdfModal">
+    <div class="modal">
+        <button class="modal-close" id="closePdfModal">&times;</button>
+        <iframe src="cv-2026.pdf" title="Vista previa del CV"></iframe>
+    </div>
+</div>
+
+<!-- Contact Form Modal -->
+<div class="modal-overlay" id="contactModal">
+    <div class="modal" style="max-width:500px;">
+        <button class="modal-close" id="closeContactModal">&times;</button>
+        <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;color:var(--text);">Enviar Mensaje</h3>
+        <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
+            <div class="form-group">
+                <label for="formName">Nombre</label>
+                <input type="text" id="formName" name="name" required placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+                <label for="formEmail">Correo electrónico</label>
+                <input type="email" id="formEmail" name="email" required placeholder="tu@email.com">
+            </div>
+            <div class="form-group">
+                <label for="formMessage">Mensaje</label>
+                <textarea id="formMessage" name="message" rows="4" required placeholder="Escribe tu mensaje aquí..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                Enviar
+            </button>
+            <p id="formStatus" style="margin-top:1rem;font-size:0.85rem;color:var(--sage-deep);display:none;"></p>
+        </form>
+    </div>
+</div>
+
+<script>
+// ── Dark Mode ──
+const darkToggle = document.getElementById('darkToggle');
+const darkIcon = document.getElementById('darkIcon');
+const moonSVG = '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+const sunSVG = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+const saved = localStorage.getItem('darkMode');
+if (saved === 'true') { document.body.classList.add('dark'); darkIcon.innerHTML = sunSVG; }
+darkToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    darkIcon.innerHTML = isDark ? sunSVG : moonSVG;
+    localStorage.setItem('darkMode', isDark);
+});
+
+// ── Progress Bar ──
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+});
+
+// ── Scroll Reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+revealEls.forEach(el => observer.observe(el));
+
+// ── Years Counter ──
 const yearsEl = document.getElementById('yearsCounter');
 if (yearsEl) {
-    const target = 15;
-    const duration = 1500;
-    const startTime = performance.now();
-    function animateCounter(now) {
-        const elapsed = now - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        yearsEl.textContent = Math.floor(eased * target);
-        if (progress < 1) requestAnimationFrame(animateCounter);
-    }
-    const counterObserver = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-            requestAnimationFrame(animateCounter);
-            counterObserver.unobserve(entries[0].target);
+    const target = 15, duration = 1500;
+    let started = false;
+    const counterObs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !started) {
+            started = true;
+            const start = performance.now();
+            function anim(now) {
+                const p = Math.min((now - start) / duration, 1);
+                yearsEl.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+                if (p < 1) requestAnimationFrame(anim);
+            }
+            requestAnimationFrame(anim);
+            counterObs.unobserve(entries[0].target);
         }
     }, { threshold: 0.5 });
-    counterObserver.observe(yearsEl);
+    counterObs.observe(yearsEl);
 }
 
-// ── Nav scroll effect ──
+// ── Nav scroll + Scroll Spy ──
 const navbar = document.getElementById('navbar');
+const navLinks = document.querySelectorAll('#navLinks a');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
 window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 20);
+    const scrollPos = window.scrollY + navbar.offsetHeight + 50;
+    let current = '';
+    sections.forEach(section => {
+        if (section.offsetTop <= scrollPos) current = section.id;
+    });
+    navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
 });
 
 // ── Mobile Menu ──
@@ -1091,40 +1141,130 @@ mobileMenu.querySelectorAll('a').forEach(link => {
 
 // ── Back to Top ──
 const backToTop = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('visible', window.scrollY > 500);
-});
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+window.addEventListener('scroll', () => backToTop.classList.toggle('visible', window.scrollY > 500));
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── Smooth scroll offset ──
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            e.preventDefault();
+            const navH = navbar.offsetHeight;
+            const pos = target.getBoundingClientRect().top + window.pageYOffset - navH - 16;
+            window.scrollTo({ top: pos, behavior: 'smooth' });
+        }
+    });
 });
 
 // ── Tag Filter ──
 let activeGroup = null;
 document.querySelectorAll('.tag-group-title').forEach(title => {
     title.addEventListener('click', () => {
-        const group = title.parentElement;
-        const groupName = group.dataset.group;
-
-        if (activeGroup === groupName) {
-            // Deselect — show all
+        const group = title.parentElement.dataset.group;
+        if (activeGroup === group) {
             activeGroup = null;
             document.querySelectorAll('.tag-group-title').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tag').forEach(t => t.classList.remove('dimmed'));
         } else {
-            // Select this group — dim others
-            activeGroup = groupName;
+            activeGroup = group;
             document.querySelectorAll('.tag-group-title').forEach(t => {
-                t.classList.toggle('active', t.parentElement.dataset.group === groupName);
+                t.classList.toggle('active', t.parentElement.dataset.group === group);
             });
             document.querySelectorAll('.tag').forEach(tag => {
-                const belongsToGroup = tag.closest('.tag-group').dataset.group === groupName;
-                tag.classList.toggle('dimmed', !belongsToGroup);
+                tag.classList.toggle('dimmed', tag.closest('.tag-group').dataset.group !== group);
             });
         }
     });
 });
 
-// ── Ripple effect on contact items ──
+// ── Experience Filter ──
+document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const filter = tab.dataset.filter;
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
+        });
+    });
+});
+
+// ── Cert Tabs ──
+document.querySelectorAll('.cert-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.cert-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const cert = tab.dataset.cert;
+        document.querySelectorAll('.cert-panel').forEach(p => {
+            p.classList.toggle('active', p.dataset.cert === cert);
+        });
+    });
+});
+
+// ── References Carousel ──
+const refTrack = document.getElementById('refTrack');
+const refDots = document.querySelectorAll('#refCarousel .carousel-dot');
+let refIndex = 0;
+function goToRef(i) {
+    refIndex = i;
+    refTrack.style.transform = `translateX(-${i * 100}%)`;
+    refDots.forEach((d, j) => d.classList.toggle('active', j === i));
+}
+refDots.forEach(dot => dot.addEventListener('click', () => goToRef(parseInt(dot.dataset.index))));
+setInterval(() => goToRef((refIndex + 1) % refDots.length), 6000);
+
+// ── Radar Chart ──
+const radarCtx = document.getElementById('radarChart');
+if (radarCtx) {
+    const radarObs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Monitoreo', 'Cloud', 'DevOps', 'Redes & Seg.', 'SysAdmin', 'Metodologías', 'Docencia'],
+                    datasets: [{
+                        label: 'Nivel de competencia',
+                        data: [90, 85, 75, 85, 80, 80, 95],
+                        backgroundColor: 'rgba(122,158,135,0.15)',
+                        borderColor: '#7a9e87',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#7a9e87',
+                        pointBorderColor: '#fff',
+                        pointRadius: 4,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: { r: { beginAtZero: true, max: 100, ticks: { stepSize: 20, backdropColor: 'transparent' }, grid: { color: 'rgba(0,0,0,0.06)' }, pointLabels: { font: { size: 11, family: 'Inter' }, color: '#5c5c5c' } } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+            radarObs.unobserve(entries[0].target);
+        }
+    }, { threshold: 0.3 });
+    radarObs.observe(radarCtx);
+}
+
+// ── Copy to Clipboard ──
+document.querySelectorAll('.contact-item[data-copy]').forEach(item => {
+    item.addEventListener('click', () => {
+        navigator.clipboard.writeText(item.dataset.copy).then(() => showToast('Copiado al portapapeles'));
+    });
+});
+
+// ── Toast ──
+const toast = document.getElementById('toast');
+let toastTimer;
+function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// ── Ripple ──
 document.querySelectorAll('.contact-item').forEach(item => {
     item.addEventListener('click', function(e) {
         const ripple = document.createElement('span');
@@ -1132,24 +1272,62 @@ document.querySelectorAll('.contact-item').forEach(item => {
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
         this.appendChild(ripple);
         ripple.addEventListener('animationend', () => ripple.remove());
     });
 });
 
-// ── Smooth scroll offset for sticky nav ──
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            e.preventDefault();
-            const navHeight = navbar.offsetHeight;
-            const targetPos = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
-            window.scrollTo({ top: targetPos, behavior: 'smooth' });
+// ── PDF Preview Modal ──
+const pdfModal = document.getElementById('pdfModal');
+document.getElementById('previewPdfBtn').addEventListener('click', () => pdfModal.classList.add('open'));
+document.getElementById('closePdfModal').addEventListener('click', () => pdfModal.classList.remove('open'));
+pdfModal.addEventListener('click', (e) => { if (e.target === pdfModal) pdfModal.classList.remove('open'); });
+
+// ── Contact Form Modal ──
+const contactModal = document.getElementById('contactModal');
+document.getElementById('openContactFormBtn').addEventListener('click', () => contactModal.classList.add('open'));
+document.getElementById('closeContactModal').addEventListener('click', () => contactModal.classList.remove('open'));
+contactModal.addEventListener('click', (e) => { if (e.target === contactModal) contactModal.classList.remove('open'); });
+
+// ── JSON Download ──
+document.getElementById('downloadJsonBtn').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.href = 'cv-2026.json';
+    a.download = 'cv-2026.json';
+    a.click();
+    showToast('Descargando JSON Resume');
+});
+
+// ── Contact Form Submit ──
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const status = document.getElementById('formStatus');
+    status.style.display = 'block';
+    status.textContent = 'Enviando...';
+    try {
+        const formData = new FormData(this);
+        await fetch(this.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+        status.textContent = 'Mensaje enviado. ¡Gracias!';
+        this.reset();
+        setTimeout(() => { contactModal.classList.remove('open'); status.style.display = 'none'; }, 2000);
+    } catch (err) {
+        status.textContent = 'Error al enviar. Intenta de nuevo.';
+    }
+});
+
+// ── Keyboard: Escape closes modals ──
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        pdfModal.classList.remove('open');
+        contactModal.classList.remove('open');
+        if (mobileMenu.classList.contains('open')) {
+            menuToggle.classList.remove('open');
+            mobileMenu.classList.remove('open');
+            document.body.style.overflow = '';
         }
-    });
+    }
 });
 </script>
 
