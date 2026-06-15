@@ -257,17 +257,18 @@
         .card-bullets li::before { content: "—"; position: absolute; left: 0; color: var(--text-muted); }
 
         /* ── Timeline ── */
-        .timeline { position: relative; padding-left: 2rem; }
+        .timeline { position: relative; padding-left: 0; }
         .timeline::before {
-            content: ''; position: absolute; left: 16px; top: 0; bottom: 0;
-            width: 1px; background: var(--border); border-radius: 1px;
+            content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+            width: 2px; background: var(--border); border-radius: 1px;
         }
-        .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 1.5rem; }
+        .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 56px; }
         .timeline-item::before {
-            content: ''; position: absolute; left: -22px; top: 0.5rem;
+            content: ''; position: absolute; left: 28px; top: 0.5rem;
             width: 12px; height: 12px; border-radius: 50%;
             background: var(--sage-deep); border: 2px solid var(--cream);
             z-index: 1;
+            transform: translateX(-50%);
         }
         .timeline-item.current::before { background: var(--lavender-deep); box-shadow: 0 0 0 4px rgba(139,125,170,0.2); }
         .timeline-card {
@@ -473,9 +474,10 @@
             .cert-list { columns: 1; }
             .contact-grid { grid-template-columns: 1fr; }
             .back-to-top { bottom: 1rem; right: 1rem; }
-            .timeline { padding-left: 1.5rem; }
-            .timeline-item { padding-left: 1rem; }
-            .timeline-item::before { left: -0.85rem; }
+            .timeline { padding-left: 0; }
+            .timeline::before { left: 22px; }
+            .timeline-item { padding-left: 48px; }
+            .timeline-item::before { left: 22px; }
             .filter-tabs { justify-content: center; }
             .cert-tabs { justify-content: center; }
         }
